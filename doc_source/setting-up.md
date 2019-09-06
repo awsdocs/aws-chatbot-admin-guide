@@ -11,7 +11,7 @@ To use AWS Chatbot, you set up Slack or Amazon Chime as an AWS Chatbot client, a
 **Note**  
 You can set up each supported AWS service to *target* one or more SNS topics to send notifications to AWS Chatbot\. You do this using each AWS service's console\. If you already have SNS topics set as targets for supported services, you can configure AWS Chatbot to use those SNS topics\. Notifications from subscribed topics will automatically appear in your Slack or Amazon Chime clients without further configuration\. 
 
-If you don't have already have an AWS account and an AWS Identity and Access Management \(IAM\) user, you need to create them first\.
+If you don't already have an AWS account and an AWS Identity and Access Management \(IAM\) user, you need to create them first\.
 
 **Topics**
 + [Sign Up for AWS](#setting-up-aws-sign-up)
@@ -71,6 +71,9 @@ You must activate IAM user and role access to Billing before you can use the `Ad
 You can use this same process to create more groups and users and to give your users access to your AWS account resources\. To learn about using policies that restrict user permissions to specific AWS resources, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) and [Example Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)\.
 
 ## Setting Up Chat Clients for AWS Chatbot<a name="Setup_intro"></a>
+
+**Note**  
+Don't enable the **Enable raw message delivery** feature for any Amazon SNS topic subscription that you want to use for AWS Chatbot\. 
 
 You use the AWS Chatbot console to configure Amazon Chime and Slack clients to receive notifications from Amazon Simple Notification Service \(Amazon SNS\) topics\. 
 
@@ -181,3 +184,19 @@ For example, in an **Amazon Chime** chat room, one webhook might send notificati
 The Amazon Chime webhook configuration is complete\. Notifications from supported services that publish to the chosen SNS topics will now appear in the Amazon Chime chat room\.
 
 You can configure as many webhooks as you need\.
+
+### Removing an Authorized Slack Client from the AWS Chatbot<a name="Removing_a_Slack_client"></a>
+
+When necessary, you can remove a Slack chat client from the AWS Chatbot configuration\. Doing so *deauthorizes* the Slack client, which revokes the permissions that AWS Chatbot uses to operate with Slack\. 
+
+Before deauthorizing a Slack client, you must delete all Slack channels\. Deleting the channels first prevents accidentally deleting the Slack workspace\. 
+
+**To configure an Amazon Chime client**
+
+1. Open the AWS Chatbot console and select **Configured clients**\.
+
+1. In the **Configure clients** page, choose the Slack client\. 
+
+1. Choose each channel in the Slack workspace configuration and choose **Delete channel**\.
+
+1. After you finish deleting all Slack channels from the workspace, choose** Remove workspace configuration**\. AWS deletes the Slack workspace\. 

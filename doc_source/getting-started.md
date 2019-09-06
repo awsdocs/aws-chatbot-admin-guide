@@ -6,12 +6,7 @@ AWS Chatbot is in beta and is subject to change\.
 
 # Getting Started with AWS Chatbot<a name="getting-started"></a>
 
-After you set up AWS Chatbot and its Amazon Simple Notification Service \(Amazon SNS\) topic subscriptions, you can begin using these new resources to help manage your AWS infrastructure\. Most services supported by AWS Chatbot use Amazon CloudWatch to send alarms to SNS topics\. To quickly verify that AWS Chatbot is working with your Amazon SNS topics, you can set up a CloudWatch alarm to send a test notification to AWS Chatbot\. If you need to customize an IAM roles to work with AWS Chatbot, you can use the procedure in this section\.
-
-**Topics**
-+ [Prerequisites](#getting-started-prerequisites)
-+ [Testing Notifications from AWS Services to Amazon Chime or Slack Chat Rooms](#Send-messages-to-chatbot)
-+ [Configuring an IAM Role for AWS Chatbot](#AWS::Chatbot::Role)
+After you set up AWS Chatbot and its Amazon Simple Notification Service topic subscriptions, you can begin using these new resources to help manage your AWS infrastructure\. Most services supported by AWS Chatbot use Amazon CloudWatch to send alarms to SNS topics\. To quickly verify that AWS Chatbot is working with your Amazon SNS topics, you can set up a CloudWatch alarm to send a test notification to AWS Chatbot\. If you need to customize an IAM role to work with AWS Chatbot, you can use the procedure in this section\.
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
 
@@ -26,7 +21,12 @@ To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends 
 
 To create a new SNS topic for testing, open the Amazon SNS console at [Simple Notification Service](https://console.aws.amazon.com/sns/)\. Add the new topic to the AWS Chatbot Slack channel or Amazon Chime webhook before you use the SNS topic elsewhere in AWS\.
 
-The following process uses Amazon CloudWatch because most AWS services supported by AWS Chatbot send their event and alarms data to CloudWatch\. Some services even use the CloudWatch console for monitoring\.
+**Note**  
+CloudWatch alarms and events are separately configured and have different characteristics for use with AWS Chatbot\. 
+
+The following procedure uses Amazon CloudWatch because most AWS services supported by AWS Chatbot send their event and alarm data to CloudWatch\. It also uses a CloudWatch alarm\. 
+
+You configure CloudWatch alarms using performance metrics from the services that are active in your account\. When you associate CloudWatch alarms with an Amazon SNS topic that is mapped to AWS Chatbot, the Amazon SNS topic sends the CloudWatch alarm notifications to the chat rooms\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md) and the [Troubleshooting](chatbot-troubleshooting.md) topic\.
 
 **To test notifications to configured chat clients**
 
@@ -68,9 +68,7 @@ If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make 
 
    1. Choose **Next**\.
 
-1. Enter a name and description for the alarm\. The name must contain only ASCII characters\. 
-
-1. Then choose **Next**\.
+1. Enter a name and description for the alarm\. The name must contain only ASCII characters\. Then, choose **Next**\.
 
 1.  For **Preview and create**, confirm that the information and conditions are correct, then choose **Create alarm**\.
 
