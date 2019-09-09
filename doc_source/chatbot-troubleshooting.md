@@ -46,5 +46,5 @@ Some AWS services support Amazon CloudWatch alarms for reporting and monitoring\
 + **When I set up an SNS topic in the AWS Billing and Cost Management console to forward notifications to the AWS Chatbot, I get a "Please comply with SNS Topic ARN format" error message\.**
 
   If the AWS Billing and Cost Management console displays an error message for the SNS topic you want to use for notifications, [you can edit the SNS topic's permissions policy so it can forward Budget notifications\.](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-sns-policy.html) 
-**Note**  
-Do this if you have already configured an SNS topic that has a subscription to AWS Chatbot or have configured a new SNS topic\. It is not necessary if you want to use an SNS topic that is already configured and working with AWS Billing and Cost Management\. You can then set up that topic with a subscription to AWS Chatbot\.
+
+  Do this if you have already configured an SNS topic that has a subscription to AWS Chatbot or have configured a new SNS topic\. It is not necessary if you want to use an SNS topic that is already configured and working with AWS Billing and Cost Management\. You can then set up that topic with a subscription to AWS Chatbot\.

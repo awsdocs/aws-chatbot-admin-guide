@@ -51,7 +51,7 @@ AWS Security Hub provides a comprehensive view of high\-priority security alerts
 
 Security Hub supports two types of integration with CloudWatch Events, both of which AWS Chatbot supports:
 + **Standard CloudWatch Events**\. [Security Hub automatically sends all findings to CloudWatch Events](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cloudwatch-events.html)\. You can define CloudWatch Events rules that automatically route generated findings to an Amazon S3 bucket, a remediation workflow, or an SNS topic\. Use this method to automatically send all Security Hub findings, or all findings with specific characteristics, to your preferred AWS Chatbot\-enabled SNS topic\.
-+ ** Security Hub Custom Actions**\. [Define custom actions in Security Hub](https://aws.amazon.com/blogs/apn/how-to-integrate-aws-security-hub-custom-actions-with-pagerduty/) and configure CloudWatch Events rules to respond to those Actions\. The CloudWatch Events rule can use its Amazon SNS topic setting to forward its notifications to an SNS topic with a subscription to AWS Chatbot\. 
++ **Security Hub Custom Actions**\.[ Define custom actions in Security Hub](https://aws.amazon.com/blogs/apn/how-to-enable-custom-actions-in-aws-security-hub/) and configure CloudWatch Events rules to respond to those Actions\. The CloudWatch Events rule can use its Amazon SNS topic setting to forward its notifications to an SNS topic with a subscription to AWS Chatbot\. 
 
 ### AWS Systems Manager<a name="system-manager"></a>
 
