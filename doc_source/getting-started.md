@@ -6,20 +6,25 @@ AWS Chatbot is in beta and is subject to change\.
 
 # Getting Started with AWS Chatbot<a name="getting-started"></a>
 
-After you set up AWS Chatbot and its Amazon Simple Notification Service topic subscriptions, you can begin using these new resources to help manage your AWS infrastructure\. Most services supported by AWS Chatbot use Amazon CloudWatch to send alarms to SNS topics\. To quickly verify that AWS Chatbot is working with your Amazon SNS topics, you can set up a CloudWatch alarm to send a test notification to AWS Chatbot\. If you need to customize an IAM role to work with AWS Chatbot, you can use the procedure in this section\.
+After you set up AWS Chatbot and its Amazon Simple Notification Service topic subscriptions, you can begin using these new resources to help manage your AWS infrastructure\. Most services supported by AWS Chatbot use Amazon CloudWatch to send alarms to SNS topics\. 
+
+To quickly verify that AWS Chatbot is working with your Amazon SNS topics, [you can set up a CloudWatch alarm to send a test notification to AWS Chatbot](#Send-messages-to-chatbot)\.
+
+If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this section](#AWS::Chatbot::Role)\.
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
 
 To ensure that your chat notifications work correctly, you need the following:
-+ An Amazon SNS topic configured in a Slack channel or an Amazon Chime webhook in the AWS Chatbot\. For information about setting up an SNS topic's subscription to AWS Chatbot, see [Setting Up AWS Chatbot with Slack](setting-up.md#Setting_up_Slack) or [Setting Up AWS Chatbot with Amazon Chime](setting-up.md#Setting_up_Chime)\.
++ An Amazon SNS topic configured in a Slack channel or an Amazon Chime webhook in the AWS Chatbot\. To create a new SNS topic for testing, open the Amazon SNS console at [Simple Notification Service](https://console.aws.amazon.com/sns/)\. Subscribe the new topic to the AWS Chatbot Slack channel or Amazon Chime webhook before you use the SNS topic elsewhere in AWS\.
 + IAM permissions and experience with all of the AWS services that you expect to use with AWS Chatbot\.
 + Experience with Amazon CloudWatch and its use of Amazon SNS topics\.
+
+**Note**  
+For information about subscribing an SNS topic to AWS Chatbot, see [Setting Up AWS Chatbot with Slack](setting-up.md#Setting_up_Slack) or [Setting Up AWS Chatbot with Amazon Chime](setting-up.md#Setting_up_Chime)\.
 
 ## Testing Notifications from AWS Services to Amazon Chime or Slack Chat Rooms<a name="Send-messages-to-chatbot"></a>
 
 To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends notifications to your Amazon Chime or Slack chat room, you can test your setup by sending a notification\. Any SNS topic can send notifications to your chat rooms, but the topic must be assigned to a service supported by AWS Chatbot\. For a complete list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
-
-To create a new SNS topic for testing, open the Amazon SNS console at [Simple Notification Service](https://console.aws.amazon.com/sns/)\. Add the new topic to the AWS Chatbot Slack channel or Amazon Chime webhook before you use the SNS topic elsewhere in AWS\.
 
 **Note**  
 CloudWatch alarms and events are separately configured and have different characteristics for use with AWS Chatbot\. 
@@ -34,7 +39,7 @@ You configure CloudWatch alarms using performance metrics from the services that
 
 1. In the navigation pane, choose **Alarms**, **Create alarm**\.
 
-1. Choose **Select metric**, and choose the **SNS** service namespace\.
+1. Choose **Select metric**, and choose the **SNS** service namespace\. \(All CloudWatch alarms use service *metrics* to generate their notifications, and you need to select one for this example\.\)
 
    1. Choose **Topic metrics**\.
 
@@ -44,17 +49,17 @@ You configure CloudWatch alarms using performance metrics from the services that
 
       The **Specify metric and conditions** page shows a graph and other information about the metric and statistic\.
 
-1.  For **Conditions**, choose the following options\.
+1.  For **Conditions** \(the circumstances under which the CloudWatch alarm fires and an action takes place\), choose the following options:
 
    1. For **Threshold type**, choose **Static**
 
    1. For **Whenever *metric* is**, choose **Lower/Equal <=threshold**\. 
 
-   1. For **than\.\.\.**, specify a threshold value of **1**\.
+   1. For **than\.\.\.**, specify a threshold value of **1**\. This setting ensures you will readily trigger the test notification\.
 
    1. Choose **Next**\.
 
-1. Choose **Configure actions**\.
+1. Choose **Configure actions**\. Here, you set the *action* to create SNS notifications when the metric threshold is exceeded\.
 
     For **Notification**, choose the following options\.
 
@@ -62,9 +67,9 @@ You configure CloudWatch alarms using performance metrics from the services that
 
    1. For **Select an SNS topic**, choose **Select an existing SNS topic**\. 
 
-   1. For **Send a notification to\.\.\.**, choose the SNS topic that has a subscription to AWS Chatbot\. If the SNS topic is already enabled in AWS Chatbot, the endpoint value for AWS Chatbot appears in the **Email \(endpoints\)** field\. 
+   1. For **Send a notification to\.\.\.**, choose your SNS topic that has a subscription to AWS Chatbot\. If the SNS topic is subscribed in AWS Chatbot, the endpoint value for AWS Chatbot appears in the **Email \(endpoints\)** field\. 
 **Note**  
-If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make sure that the SNS topic is set up correctly in the Slack channel\. For more information, see [Setting Up AWS Chatbot with Slack](setting-up.md#Setting_up_Slack) or [Setting Up AWS Chatbot with Amazon Chime](setting-up.md#Setting_up_Chime)\. 
+If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make sure that the SNS topic is set up correctly in the Slack channel or Amazon Chime webhook\. For more information, see [Setting Up AWS Chatbot with Slack](setting-up.md#Setting_up_Slack) or [Setting Up AWS Chatbot with Amazon Chime](setting-up.md#Setting_up_Chime)\. 
 
    1. Choose **Next**\.
 
@@ -72,7 +77,7 @@ If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make 
 
 1.  For **Preview and create**, confirm that the information and conditions are correct, then choose **Create alarm**\.
 
-When the alarm triggers for the first time, you should receive the first test notification in your chat room\., confirming that AWS Chatbot is working correctly and receiving alarm notifications from Amazon CloudWatch\.
+When the alarm triggers for the first time, you should receive the first test notification in your chat room, confirming that AWS Chatbot is working correctly and receiving alarm notifications from Amazon CloudWatch\.
 
 ## Configuring an IAM Role for AWS Chatbot<a name="AWS::Chatbot::Role"></a>
 
@@ -86,101 +91,101 @@ For testing, you can use a AWS Chatbot IAM role that you create when you configu
 
 1. Choose **Attach Policies**\.
 
-1. In the **Search** box, enter **CloudWatchRead**\. The **AWS Policies** list shows the **AWS\-Chatbot\-Notifications\-Only** policy\. This policy has full List and Read privileges for Amazon CloudWatch\.
+   1. In the **Search** box, enter **CloudWatchRead**\. The **AWS Policies** list shows the **CloudWatchReadOnlyAccess** policy\. This policy has full List and Read privileges for Amazon CloudWatch\.
 
-1. Choose the check box for the **CloudWatchReadOnlyAccess** policy, and choose **Attach Policy**\.
+   1. Choose the check box for the **CloudWatchReadOnlyAccess** policy, and choose **Attach Policy**\.
 
 1. Ensure that the selected role has the **CloudWatchReadOnlyAccess** entry in its list of policies\.
 
-   You must also edit the trust relationships information for the IAM role\. This requires a small edit to the JSON properties in the IAM role, which you do in the next step\.
-
 1. Choose the **Trust relationships** tab\. 
 
-1. Choose **Edit trust relationship**\. You edit the JSON policy document on this page\. For example, the following is a basic Admin role for an AWS account\.
+   You must also edit the trust relationships information for the IAM role\. This requires a small edit to the JSON properties in the IAM role\.
 
-   ```
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Sid": "",
-         "Effect": "Allow",
-         "Principal": {
-           "AWS": "arn:aws:iam::123456789012:root"
-         },
-         "Action": "sts:AssumeRole",
-         "Condition": {
-           "StringEquals": {
-             "sts:ExternalId": "YourExternalIDHere"
-           }
-         }
-       }
-     ]
-   }
-   ```
+   1. Choose **Edit trust relationship**\. You edit the JSON policy document on this page\. For example, the following is a basic Admin role for an AWS account\.
 
-1. Add a new **Statement** block to the IAM role's trust relationship configuration\. You can copy the following JSON text block verbatim\. 
-
-   ```
-   {
-     "Version": "2012-10-17",
-     "Statement": [
+      ```
       {
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "chatbot.amazonaws.com"
-         },
-         "Action": "sts:AssumeRole"
-       }
-     ]
-   }
-   ```
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::123456789012:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+              "StringEquals": {
+                "sts:ExternalId": "YourExternalIDHere"
+              }
+            }
+          }
+        ]
+      }
+      ```
 
-   The required JSON text, shown in bold, creates the new trusted entity for the IAM role\.
+   1. Add a new **Statement** block to the IAM role's trust relationship configuration\. You can copy the following JSON text block verbatim\. 
 
-1. Add a comma \(,\) after the bracket denoting the end of the first statement block\.
+      ```
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+         {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "chatbot.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+      ```
 
-1. Copy and paste the following text just below the final statement bracket\.
+      The required JSON text, shown in bold, creates the new trusted entity for the IAM role\.
 
-   ```
-       {
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "chatbot.amazonaws.com"
-         },
-         "Action": "sts:AssumeRole"
-       }
-   ```
+   1. Add a comma \(,\) after the bracket denoting the end of the first statement block\.
 
-   The result looks like the following\.
+   1. Copy and paste the following text just below the final statement bracket\.
 
-   ```
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Sid": "",
-         "Effect": "Allow",
-         "Principal": {
-           "AWS": "arn:aws:iam::123456784321:root"
-         },
-         "Action": "sts:AssumeRole",
-         "Condition": {
-           "StringEquals": {
-             "sts:ExternalId": "<your SNS Topic ID>"
-           }
-         }
-       },
-       {
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "chatbot.amazonaws.com"
-         },
-         "Action": "sts:AssumeRole"
-       }
-     ]
-   }
-   ```
+      ```
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "chatbot.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+      ```
+
+      The result looks like the following\.
+
+      ```
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::123456784321:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+              "StringEquals": {
+                "sts:ExternalId": "YourExternalIDHere"
+              }
+            }
+          },
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "chatbot.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+      ```
 
 1. Choose **Update Trust Policy**\. The editor performs JSON validation\. If you made a mistake, you will be notified and can fix it\. You won't be able to save flawed JSON code\.
 
