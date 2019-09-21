@@ -118,34 +118,15 @@ For testing, you can use a AWS Chatbot IAM role that you create when you configu
               "StringEquals": {
                 "sts:ExternalId": "YourExternalIDHere"
               }
-            }
-          }
+            } 
+          } << add a comma here
         ]
       }
       ```
 
-   1. Add a new **Statement** block to the IAM role's trust relationship configuration\. You can copy the following JSON text block verbatim\. 
+   1. Add a comma \(,\) after the curly bracket denoting the end of the last statement block\.
 
-      ```
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-         {
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "chatbot.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-          }
-        ]
-      }
-      ```
-
-      The required JSON text, shown in bold, creates the new trusted entity for the IAM role\.
-
-   1. Add a comma \(,\) after the bracket denoting the end of the first statement block\.
-
-   1. Copy and paste the following text just below the final statement bracket\.
+   1. Copy and paste the following text\.
 
       ```
           {

@@ -126,6 +126,8 @@ You can configure as many channels, with as many topics, as you need\.
 **Note**  
 If you configure a private Slack channel, run the `/invite @AWS` command in Slack to invite the AWS Chatbot to the chat room\.
 
+The SNS topics you choose also must be configured in the services for which you want to receive notifications\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md#related-services.title)\.
+
 ### Setting Up AWS Chatbot with Amazon Chime<a name="Setting_up_Chime"></a>
 
 To set up AWS Chatbot for Amazon Chime, get the webhook URL for your team's chat room from Amazon Chime\.
@@ -175,7 +177,7 @@ For example, in an **Amazon Chime** chat room, one webhook might send notificati
 
    1. For **SNS Region**, choose the AWS Region that hosts the SNS topics for this AWS Chatbot subscription\.
 
-   1. For **SNS topic**, choose the SNS topic for the client subscription\. This topic determines the content that will be sent to the Slack channel\. If more than one topic is available, you can choose them from the same dropdown\.
+   1. For **SNS topic**, choose the SNS topic for the client subscription\. This topic determines the content that will be sent to the Amazon Chime webhook\. If more than one topic is available, you can choose them from the same dropdown\.
 
    1. If you want to add an SNS topic from another Region to the notification subscription, choose **Add another Region**\. 
 
@@ -183,7 +185,7 @@ For example, in an **Amazon Chime** chat room, one webhook might send notificati
 
 The Amazon Chime webhook configuration is complete\. Notifications from supported services that publish to the chosen SNS topics will now appear in the Amazon Chime chat room\.
 
-You can configure as many webhooks as you need\.
+You can configure as many webhooks as you need\. The SNS topics you choose also must be configured in the services for which you want to receive notifications\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md#related-services.title)\.
 
 ### Removing an Authorized Slack Client from the AWS Chatbot<a name="Removing_a_Slack_client"></a>
 

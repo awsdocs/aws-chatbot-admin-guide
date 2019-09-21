@@ -19,9 +19,10 @@ Possible causes:
   Services that support CloudWatch Events forwarding by Amazon SNS topics to Slack or Amazon Chime chat rooms include:
   + [AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/sns-alert-chime.html)
   + [AWS Config Events](https://docs.aws.amazon.com/config/latest/developerguide/monitor-config-with-cloudwatchevents.html)
-  + [Amazon GuardDuty Events](https://docs.aws.amazon.com/guardduty/latest/ug//guardduty_findings_cloudwatch.html)
+  + [Amazon GuardDuty Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html)
   + [AWS Health Events](https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html)
   + [ AWS Security Hub Events](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cloudwatch-events.html#securityhub-cwe-send)
+  + [ Amazon EventBridge Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-eventbridge-rule.html)
   + [AWS Systems Manager Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-cloudwatch-events.html) including the following:
     + AWS Systems Manager [Configuration Compliance Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-fixing.html)
     + AWS Systems Manager [Maintenance Windows Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-mw-register.html)
