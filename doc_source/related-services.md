@@ -22,7 +22,7 @@ You can set up the following AWS services to forward notifications to Amazon Chi
 
 AWS Billing and Cost Management helps AWS account holders plan service usage, service costs, and instance reservations\. You do this using several specific types of budgets, which track your unblended costs, subscriptions, refunds, and Reserved Instances\. The service sends AWS Budget Alerts to an Amazon SNS topic\. You then map the Amazon SNS topic in AWS Chatbot to send those notifications to your chat rooms\.
 
-For information about setting up Amazon SNS topics for AWS budgets, see [Creating an Amazon SNS Topic for Budget Notifications](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-sns-policy.html) in the *AWS Billing and Cost Management User Guide*\.
+For information about setting up Amazon SNS topics for AWS budgets, see [Creating an Amazon SNS Topic for Budget Notifications](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-sns-policy.html) in the* AWS Billing and Cost Management User Guide*\.
 
 ## AWS CloudFormation \(Stack Options\)<a name="cloud-formation"></a>
 
@@ -48,21 +48,13 @@ AWS Chatbot supports several AWS services through [https://docs.aws.amazon.com/A
 
 You map the SNS topic to the CloudWatch Events rule, and then map it to an Slack channel or Amazon Chime webhook in the AWS Chatbot console\. When a service event matches the rule, the rule's SNS topic sends a notification to the chat room\. 
 
-AWS Chatbot supports CloudWatch Events for the following AWS services: Amazon EventBridge, AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\.
-
-### [Amazon EventBridge](https://console.aws.amazon.com/events/)<a name="eventbridge"></a>
-
-The Amazon EventBridge service provides enterprises with real time access to resource changes in AWS, Software\-as\-a\-Service \(SaaS\) applications, and custom applications without writing code\. You can use EventBridge as a complete functional substitute for CloudWatch Events\. CloudWatch Events users can use the EventBridge console to access and edit their [existing event bus configurations](https://docs.aws.amazon.com/lumberyard/latest/userguide/ebus-in-depth.html), CloudWatch Events rules, and existing events, and configure SNS topics to forward event notifications, without using the CloudWatch console\. 
-
-EventBridge events have a close relationship to CloudWatch Events\. EventBridge uses the same CloudWatch Events API, so your existing CloudWatch Events and API usage remain the same\. You can also configure your own event rules directly in the EventBridge console without ever using the CloudWatch console\. 
-
-AWS Chatbot fully supports operation with EventBridge\. You can configure any SNS topic in EventBridge and map the same topic in the AWS Chatbot console to send associated events to your chat rooms\. For more information about creating event rules in EventBridge, see [Creating an EventBridge Rule That Triggers on an Event from an AWS Resource](https://docs.aws.amazon.com/eventbridge/latest/userguide//create-eventbridge-rule.html) in the *Amazon EventBridge User Guide*\. You choose the appropriate SNS topic with the **Select targets** setting\.
+AWS Chatbot supports CloudWatch Events for the following AWS services: AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\.
 
 ### [AWS Config](https://console.aws.amazon.com/config/)<a name="aws-config"></a>
 
 AWS Config performs resource oversight and tracking for auditing and compliance, config change management, troubleshooting, and security analysis\. It provides a detailed view of AWS resources configuration in your AWS account\. The service also shows how resources relate to one another and how they were configured in the past, so you can see how configurations and relationships change over time\. 
 
-For AWS Config monitoring, [you configure Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) or [EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide//create-eventbridge-rule.html) to forward AWS Config events notifications to an Amazon SNS topic\. You can then map that topic to AWS Chatbot to track those event notifications in chat rooms\.
+For AWS Config monitoring, [you configure Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) to forward AWS Config events notifications to an Amazon SNS topic\. You can then map that topic to AWS Chatbot to track those event notifications in chat rooms\.
 
  For more information, see [ Notifications for AWS Config](https://docs.aws.amazon.com/config/latest/developerguide//notifications-for-AWS-Config.html) in the *AWS Config Developer's Guide*\.
 
@@ -70,7 +62,7 @@ For AWS Config monitoring, [you configure Amazon CloudWatch Events rules](https:
 
 Amazon GuardDuty is a security threat monitoring service that detects and reports on potential security threats in your AWS account\. It uses threat intelligence feeds, such as lists of malicious IPs and domains, and machine learning to identify possible unauthorized and malicious activity in your AWS environment\.
 
-GuardDuty reports its security incidents and threats through *findings*\. Findings appear in the GuardDuty console and automatically appear as CloudWatch Events\. [You then create Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) or [EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide//create-eventbridge-rule.html), so these events appear as notifications to a selected Amazon SNS topic\. You then map that SNS topic to a Slack channel or Amazon Chime webhook in AWS Chatbot\.
+GuardDuty reports its security incidents and threats through *findings*\. Findings appear in the GuardDuty console and automatically appear as CloudWatch Events\. [You then create Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html),  so these events appear as notifications to a selected Amazon SNS topic\. You then map that SNS topic to a Slack channel or Amazon Chime webhook in AWS Chatbot\.
 
  For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug//guardduty_findings_cloudwatch.html) in the *Amazon GuardDuty User Guide*\.
 
@@ -78,7 +70,7 @@ GuardDuty reports its security incidents and threats through *findings*\. Findin
 
 AWS Health provides visibility into the state of your AWS resources, services, and accounts\. It provides information about the performance and availability of resources that affect your applications running on AWS and guidance for remediation\. AWS Health provides this information in a console called the Personal Health Dashboard \(PHD\)\. 
 
-AWS Health directly supports CloudWatch Events notifications\. You configure [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) or [EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide//create-eventbridge-rule.html) for AWS Health, and specify an Amazon SNS topic mapped in AWS Chatbot\. 
+AWS Health directly supports CloudWatch Events notifications\. You configure [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) for AWS Health, and specify an Amazon SNS topic mapped in AWS Chatbot\. 
 
 For more information, see [Monitoring AWS Health Events with Amazon CloudWatch Events](https://docs.aws.amazon.com/health/latest/ug//cloudwatch-events-health.html) in the *AWS Health User Guide*\.
 
@@ -86,9 +78,9 @@ For more information, see [Monitoring AWS Health Events with Amazon CloudWatch E
 
 AWS Security Hub provides a comprehensive view of high\-priority security alerts and compliance status across your AWS accounts\. Security Hub aggregates, organizes, and prioritizes security findings from multiple AWS services, including Amazon GuardDuty, Amazon Inspector, and Amazon Macie\. Security Hub reduces the effort of collecting and prioritizing security findings across accounts, from AWS services, and from AWS partner tools\. 
 
-Security Hub supports two types of integration with [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) or [EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide//create-eventbridge-rule.html), both of which AWS Chatbot supports:
-+ **Standard CloudWatch Events**\. [Security Hub automatically sends all findings to CloudWatch Events](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cloudwatch-events.html)\. You can define CloudWatch Events or EventBridge rules that automatically route generated findings to an Amazon S3 bucket, a remediation workflow, or an SNS topic\. Use this method to automatically send all Security Hub findings, or all findings with specific characteristics, to an SNS topic to which AWS Chatbot subscribes\.
-+ **Security Hub Custom Actions**\.[ Define custom actions in Security Hub](https://aws.amazon.com/blogs/apn/how-to-enable-custom-actions-in-aws-security-hub/) and configure [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) or [EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide//create-eventbridge-rule.html) to respond to those actions\. The event rule uses its Amazon SNS topic setting to forward its notifications to the SNS topic to which AWS Chatbot subscribes\. 
+Security Hub supports two types of integration with [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) both of which AWS Chatbot supports:
++ **Standard CloudWatch Events**\. [Security Hub automatically sends all findings to CloudWatch Events](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cloudwatch-events.html)\. You can define CloudWatch Events rules that automatically route generated findings to an Amazon S3 bucket, a remediation workflow, or an SNS topic\. Use this method to automatically send all Security Hub findings, or all findings with specific characteristics, to an SNS topic to which AWS Chatbot subscribes\.
++ **Security Hub Custom Actions**\.[ Define custom actions in Security Hub](https://aws.amazon.com/blogs/apn/how-to-enable-custom-actions-in-aws-security-hub/) and configure [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) to respond to those actions\. The event rule uses its Amazon SNS topic setting to forward its notifications to the SNS topic to which AWS Chatbot subscribes\. 
 
 ### [AWS Systems Manager](https://console.aws.amazon.com/systems-manager/)<a name="system-manager"></a>
 
