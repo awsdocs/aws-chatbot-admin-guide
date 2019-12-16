@@ -33,18 +33,18 @@ Some AWS services support Amazon CloudWatch alarms for reporting and monitoring\
 + **The SNS topic doesn't have a subscription to AWS Chatbot\.**
 
   In the Amazon SNS console, check the **Subscriptions** tab on the **Topics** page to see if the topic has a subscription\. If the topic doesn't, open the AWS Chatbot console, then open your authorized client, and look at the **Configured channels** or **Configured webhooks** list\. Add a new channel or webhook configuration, and add the SNS topic\. Without this configuration, event notifications can't reach the chat rooms\. 
-+ **Your SNS topic subcription to the AWS Chatbot has the Enable raw message delivery setting enabled\.**
++ **Your SNS topic subscription to the AWS Chatbot has the Enable raw message delivery setting enabled\.**
 
-  Don't enable the **Enable raw message delivery** feature for any SNS topic subcriptions to AWS Chatbot\.
+  Don't enable the **Enable raw message delivery** feature for any SNS topic subscriptions to AWS Chatbot\.
 
 ## Other AWS Chatbot Issues<a name="chatbot-notification-troubleshooting"></a>
 + **CloudWatch alarm notifications don't show the graphs from the reporting metrics\.**
 
   The IAM role doesn’t have CloudWatchRead permissions\. 
 
-  In the AWS Chatbot console, create a new role\. This role requires the Notifications permissions policy that is available from the AWS Chatbot console when you configure a new webhook or Slack channel\. You can also [edit your IAM role to add the needed CloudWatchRead permissions](getting-started.md#AWS::Chatbot::Role) for use with AWS Chatbot\.
+  In the AWS Chatbot console, create a new role\. This role requires the Notifications permissions policy from the AWS Chatbot console when you configure a new webhook or Slack channel\. You can also edit your IAM role to [add the CloudWatchRead permissions](getting-started.md#AWS::Chatbot::Role) for AWS Chatbot\.
 + **When I set up an SNS topic in the AWS Billing and Cost Management console to forward notifications to the AWS Chatbot, I get a "Please comply with SNS Topic ARN format" error message\.**
 
   If the AWS Billing and Cost Management console displays an error message for the SNS topic you want to use for notifications, [you can edit the SNS topic's permissions policy so it can forward Budget notifications\.](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-sns-policy.html) 
 
-  Do this if you have already configured an SNS topic that has a subscription to AWS Chatbot or have configured a new SNS topic\. It is not necessary if you want to use an SNS topic that is already configured and working with AWS Billing and Cost Management\. You can then set up that topic with a subscription to AWS Chatbot\.
+  Do this if you have already configured an SNS topic that has a subscription to AWS Chatbot or have configured a new SNS topic\. It is not needed if you want to use an Amazon SNS topic that is already configured and working with AWS Billing and Cost Management\. [You can then set up that topic with a subscription to AWS Chatbot](setting-up.md#Setup_intro)\.

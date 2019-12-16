@@ -6,7 +6,9 @@ AWS Chatbot is in beta and is subject to change\.
 
 # What Is AWS Chatbot?<a name="what-is"></a>
 
-AWS Chatbot is an AWS service that enables DevOps and software development teams to use Amazon Chime and Slack chat rooms to monitor and respond to operational events in their AWS Cloud\. AWS Chatbot processes AWS service notifications from Amazon Simple Notification Service \(Amazon SNS\), and forwards them to Amazon Chime and Slack chat rooms so teams can analyze and act on them, regardless of location\.
+AWS Chatbot is an AWS service that enables DevOps and software development teams to use Amazon Chime and Slack chat rooms to monitor and respond to operational events in their AWS Cloud\. AWS Chatbot processes AWS service notifications from Amazon Simple Notification Service \(Amazon SNS\), and forwards them to Amazon Chime and Slack chat rooms so teams can analyze and act on them immediately, regardless of location\.
+
+You can also run AWS CLI commands in Slack channels, and file AWS Support cases from the Slack screen\.
 
 **Topics**
 + [Features of AWS Chatbot](#chatbot-benefits)
@@ -18,7 +20,7 @@ AWS Chatbot is an AWS service that enables DevOps and software development teams
 
 ## Features of AWS Chatbot<a name="chatbot-benefits"></a>
 
-AWS Chatbot enables ChatOps for AWS\. *ChatOps* speeds software development and operations by using chat clients and chatbots to communicate and execute tasks as a team\. AWS Chatbot notifies chat users about events in their AWS services, so DevOps teams can monitor and resolve issues in real time, instead of receiving emails from their SNS topics\. AWS Chatbot also allows formatting of incident metrics from Amazon CloudWatch into charts for viewing in chat notifications\.
+AWS Chatbot enables ChatOps for AWS\. *ChatOps* speeds software development and operations by enabling DevOps teams to use chat clients and chatbots to communicate and execute tasks\. AWS Chatbot notifies chat users about events in their AWS services, so teams can collaboratively monitor and resolve issues in real time, instead of addressing emails from their SNS topics\. AWS Chatbot also allows you to format incident metrics from Amazon CloudWatch as charts for viewing in chat notifications\.
 
 ## How AWS Chatbot Works<a name="chatbot-works"></a>
 
@@ -36,11 +38,13 @@ AWS Chatbot is available in all commercial AWS Regions\. It supports using all s
 
 To use AWS Chatbot, you need the following:
 + An AWS account to associate with Amazon Chime or Slack chat clients during AWS Chatbot setup\. 
-+ Slack workspace or Amazon Chime chat room administrative privileges\. You can be the Slack workspace owner or have the ability to work with workspace owners to get approval for installing AWS Chatbot\.
++ Administrative privileges for your Slack workspace or Amazon Chime chat room\. You can be the Slack workspace owner or have the ability to work with workspace owners to get approval for installing AWS Chatbot\.
 + Familiarity with AWS Identity and Access Management \(IAM\) and IAM roles and policies\. For more information about IAM, see [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/)
-+ \(Recommended\) Experience with the AWS services supported by AWS Chatbot, including experience configuring those services to subscribe to Amazon Simple Notification Service \(Amazon SNS\) topics to send notifications\. For information about supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
++ Experience with the AWS services supported by AWS Chatbot, including experience configuring those services to subscribe to Amazon Simple Notification Service \(Amazon SNS\) topics to send notifications\. For information about supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
 
-To access Amazon CloudWatch metrics, AWS Chatbot requires an AWS Identity and Access Management \(IAM\) role with a permissions policy and a trust policy\. You can create this IAM role, with the required policies, with the AWS Chatbot console\. You can also use an existing IAM role, provided that it has the required policies\. For testing, we recommend using the role created with the AWS Chatbot console\. To use an existing IAM role, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.
+To access Amazon CloudWatch metrics, AWS Chatbot requires an AWS Identity and Access Management \(IAM\) role with a permissions policy and a trust policy\. You create this IAM role, with the required policies, [using the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\. You can use an existing IAM role, but it must have the required policies\.
+
+For testing, we recommend using the role that you create with the AWS Chatbot console\. To use an existing IAM role, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.
 
 ## Accessing AWS Chatbot<a name="chatbot-access"></a>
 
@@ -48,7 +52,6 @@ You access and configure AWS Chatbot with its console\.
 
 ## AWS Chatbot Preview Limitations<a name="chatbot-limitations"></a>
 
-This AWS Chatbot release supports the AWS services described in [Using AWS Chatbot with Other AWS Services](related-services.md)\. This release doesn't support the following:
+The AWS Chatbot Preview supports the AWS services described in [Using AWS Chatbot with Other AWS Services](related-services.md)\. It doesn't support the following:
 + Sending SNS notifications from unsupported AWS services
-+ Passing through of arbitrary text using SNS topics
-+ Running AWS CLI commands 
++ Passing through arbitrary text using SNS topics

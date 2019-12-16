@@ -19,6 +19,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Setting Up AWS Chatbot](setting-up.md)
 + [Getting Started with AWS Chatbot](getting-started.md)
 + [Logging AWS Chatbot API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
++ [Running AWS CLI Commands from Slack Channels](chatbot-cli-commands.md)
 + [Troubleshooting AWS Chatbot](chatbot-troubleshooting.md)
 + [Document History](doc-history.md)
 + [AWS Glossary](glossary.md)

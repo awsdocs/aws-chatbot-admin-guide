@@ -10,7 +10,12 @@ After you set up AWS Chatbot and its Amazon Simple Notification Service topic su
 
 To quickly verify that AWS Chatbot is working with your Amazon SNS topics, [you can set up a CloudWatch alarm to send a test notification to AWS Chatbot](#Send-messages-to-chatbot)\.
 
-If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this section](#AWS::Chatbot::Role)\.
+If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this topic](#AWS::Chatbot::Role)\.
+
+**Topics**
++ [Prerequisites](#getting-started-prerequisites)
++ [Testing Notifications from AWS Services to Amazon Chime or Slack Chat Rooms](#Send-messages-to-chatbot)
++ [Configuring an IAM Role for AWS Chatbot](#AWS::Chatbot::Role)
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
 
@@ -29,7 +34,7 @@ To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends 
 **Note**  
 CloudWatch alarms and events are separately configured and have different characteristics for use with AWS Chatbot\. 
 
-The following procedure uses Amazon CloudWatch because most AWS services supported by AWS Chatbot send their event and alarm data to CloudWatch\. It also uses a CloudWatch alarm\. 
+The following procedure uses a CloudWatch alarm because most AWS services supported by AWS Chatbot send their event and alarm data to CloudWatch\. 
 
 You configure CloudWatch alarms using performance metrics from the services that are active in your account\. When you associate CloudWatch alarms with an Amazon SNS topic that is mapped to AWS Chatbot, the Amazon SNS topic sends the CloudWatch alarm notifications to the chat rooms\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md) and the [Troubleshooting](chatbot-troubleshooting.md) topic\.
 
@@ -39,23 +44,33 @@ You configure CloudWatch alarms using performance metrics from the services that
 
 1. In the navigation pane, choose **Alarms**, **Create alarm**\.
 
+1. Select the correct AWS **Region** at the top right of the AWS console, that contains the Amazon SNS topic you need\. \(**Tip:** to make sure you have the right region for your SNS topics for testing alarms, you can check the AWS Chatbot configuration to see the regions for all configured SNS topics in each channel or webhook\.\)
+
 1. Choose **Select metric**, and choose the **SNS** service namespace\. \(All CloudWatch alarms use service *metrics* to generate their notifications, and you need to select one for this example\.\)
 
    1. Choose **Topic metrics**\.
 
    1. Choose the check box for the SNS topic next to its **Topic Name** and **Metric Name**\. Any SNS topics that you configured with AWS Chatbot appear in this list\.
 
+      *Important*: if you do not see your desired Amazon SNS topic in the SNS Topic list, make sure to select the correct AWS Region in the AWS console when you begin configuring the new CloudWatch alarm\.
+
    1. Choose **Select metric**\.
 
-      The **Specify metric and conditions** page shows a graph and other information about the metric and statistic\.
+   The **Specify metric and conditions** page shows a graph and other information about the metric and statistic\.
 
 1.  For **Conditions** \(the circumstances under which the CloudWatch alarm fires and an action takes place\), choose the following options:
 
-   1. For **Threshold type**, choose **Static**
+   1. For **Threshold type**, choose **Static**\.
 
    1. For **Whenever *metric* is**, choose **Lower/Equal <=threshold**\. 
 
-   1. For **than\.\.\.**, specify a threshold value of **1**\. This setting ensures you will readily trigger the test notification\.
+   1. For **than\.\.\.**, specify a threshold value of **1**\. This setting ensures you will trigger the test notification within one minute\.
+
+   1. Under **Additional configuration**, do the following: 
+
+      1. For **Datapoints to alarm**, select **1 out of 1**\.
+
+      1. For **Missing data treatment**, select **Treat missing data as bad**\.
 
    1. Choose **Next**\.
 
@@ -81,94 +96,46 @@ When the alarm triggers for the first time, you should receive the first test no
 
 ## Configuring an IAM Role for AWS Chatbot<a name="AWS::Chatbot::Role"></a>
 
-For testing, you can use a AWS Chatbot IAM role that you create when you configure the chat clients for AWS Chatbot\. If you want to use an existing IAM role from your AWS account to manage AWS Chatbot processes, you can edit the role in the IAM console\.
-
-**To configure an IAM role for AWS Chatbot**
-
-1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Roles**, and choose the IAM role that you want to edit\.
-
-1. Choose **Attach Policies**\.
-
-   1. In the **Search** box, enter **CloudWatchRead**\. The **AWS Policies** list shows the **CloudWatchReadOnlyAccess** policy\. This policy has full List and Read privileges for Amazon CloudWatch\.
-
-   1. Choose the check box for the **CloudWatchReadOnlyAccess** policy, and choose **Attach Policy**\.
-
-1. Ensure that the selected role has the **CloudWatchReadOnlyAccess** entry in its list of policies\.
-
-1. Choose the **Trust relationships** tab\. 
-
-   You must also edit the trust relationships information for the IAM role\. This requires a small edit to the JSON properties in the IAM role\.
-
-   1. Choose **Edit trust relationship**\. You edit the JSON policy document on this page\. For example, the following is a basic Admin role for an AWS account\.
-
-      ```
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Sid": "",
-            "Effect": "Allow",
-            "Principal": {
-              "AWS": "arn:aws:iam::123456789012:root"
-            },
-            "Action": "sts:AssumeRole",
-            "Condition": {
-              "StringEquals": {
-                "sts:ExternalId": "YourExternalIDHere"
-              }
-            } 
-          } << add a comma here
-        ]
-      }
-      ```
-
-   1. Add a comma \(,\) after the curly bracket denoting the end of the last statement block\.
-
-   1. Copy and paste the following text\.
-
-      ```
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "chatbot.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-          }
-      ```
-
-      The result looks like the following\.
-
-      ```
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Sid": "",
-            "Effect": "Allow",
-            "Principal": {
-              "AWS": "arn:aws:iam::123456784321:root"
-            },
-            "Action": "sts:AssumeRole",
-            "Condition": {
-              "StringEquals": {
-                "sts:ExternalId": "YourExternalIDHere"
-              }
-            }
-          },
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "chatbot.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-          }
-        ]
-      }
-      ```
-
-1. Choose **Update Trust Policy**\. The editor performs JSON validation\. If you made a mistake, you will be notified and can fix it\. You won't be able to save flawed JSON code\.
+You can create new IAM roles in the AWS Chatbot console, which provides a convenient way to deploy the AWS Chatbot service\. You associate these roles with your Slack channels or Amazon Chime webhooks\. The AWS Chatbot console does not allow editing of IAM roles, including any roles that you've created in the AWS Chatbot console\. 
 
 **Note**  
-The role's **Trusted entities** list ensures that the IAM role has the permissions to manage and configure AWS Chatbot and all CloudWatch information\. The permissions also support correctly forwarding and formatting metrics data as charts to chat rooms\.
+AWS requires that you use the IAM console to edit IAM roles\. If you create roles in the AWS Chatbot console, you need to use the IAM console to edit them\. This might happen, for example, when you are using the AWS Chatbot service and a new release comes out that supports new features requiring a new IAM policy\.
+
+Use the IAM console to edit AWS Chatbot roles\. You can use the entire set of IAM console features to specify permissions for your AWS Chatbot users\.
+
+**To edit roles**
+
+1. [Log in to the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
+
+1. Choose the Slack channel or Amazon Chime webhook, and choose the IAM role associated with the channel or webhook\. 
+
+   The IAM console opens, automatically showing role configuration page, with the **Permissions** tab displaying the selected role\. 
+
+1. Choose **Attach Policies**\.
+**Note**  
+You can attach AWS managed policies and customer managed policies\. AWS Chatbot roles support both types of IAM policies\.
+
+1. Choose the policy you want by choosing its name\. You can use the **Search** box to search for the policy by its name or by a partial string of characters\. For example, all IAM policies associated with AWS Chatbot includes the character string **Chatbot** as part of the policy name\. Following are the preconfigured customer managed policies available for AWS Chatbot:
+   + **AWS\-Chatbot\-NotificationsOnly\-Policy**
+   + **AWS\-Chatbot\-LambdaInvoke\-Policy**
+   + **AWS\-Chatbot\-ReadOnly\-Commands\-Policy**
+
+   You can use these policies to create your own policies that are less permissive and specify the resources their users can access in their roles\. You can also substitute these custom policies for the ones listed here\.
+
+1. You can also attach any of three AWS managed policies to any role\. You can use these policies as templates to create your own policies\.
+   + **ReadOnlyAccess**
+   + **CloudWatchReadOnlyAccess**
+   + **AWSSupportAccess**
+
+   The **ReadOnlyAccess** policy is automatically attached to any role you create in the AWS Chatbot console\. 
+
+   The **AWSSupportAccess** policy is the only AWS managed policy that appears in the AWS Chatbot console when you configure new roles there\.
+
+   You can use these policies to create your own policies that are less permissive and specify the resources their users can access\. You can substitute these custom policies for the ones listed here\.
+
+1. Choose each of the policies you want to attach to the role and choose **Attach policy**\. If needed, use the Search box to locate the policies you're looking for\.
+
+   After you click **Attach policy**, the role's **Permissions** page opens and shows the change in the **Permissions** list\.
+
+**Note**  
+For more information about editing IAM policies, see [Editing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Exercise caution at all times when editing policies, and don't overwrite existing customer managed policies unless necessary\.
