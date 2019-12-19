@@ -100,7 +100,7 @@ To allow AWS Chatbot to send notifications to your Slack channel, you must confi
 
 1. For **Slack channel**, choose the channel that you want to use\.
 **Note**  
-You can use private Slack channels with AWS Chatbot\. To do so, choose **Private channel**\. In Slack, copy the Channel ID of the private channel\. In AWS Chatbot, paste the ID into the **Channel URL** field\. \(If you copy the URL of the private Slack channel, the AWS Chatbot console shows only the Channel ID value when you paste it into the field\.\) In Slack, go to the private channel and enter the `/invite @AWS` command as a message in the chat window\. Doing so invites the AWS Chatbot service into the private channel \(without any other AWS services\)\. 
+You can use private Slack channels with AWS Chatbot\. To do so, choose **Private channel**\. In Slack, copy the Channel ID of the private channel\. In AWS Chatbot, paste the ID into the **Channel URL** field\. \(If you copy the URL of the private Slack channel, the AWS Chatbot console shows only the Channel ID value when you paste it into the field\.\) 
 
 1. Define the **IAM permissions** that the chatbot uses for messaging your Slack chat room:
 

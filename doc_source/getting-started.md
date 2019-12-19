@@ -6,16 +6,11 @@ AWS Chatbot is in beta and is subject to change\.
 
 # Getting Started with AWS Chatbot<a name="getting-started"></a>
 
-After you set up AWS Chatbot and its Amazon Simple Notification Service topic subscriptions, you can begin using these new resources to help manage your AWS infrastructure\. Most services supported by AWS Chatbot use Amazon CloudWatch to send alarms to SNS topics\. 
+After you set up AWS Chatbot and its Amazon Simple Notification Service topic subscriptions, you can begin using these new resources to help manage your AWS infrastructure\. 
 
-To quickly verify that AWS Chatbot is working with your Amazon SNS topics, [you can set up a CloudWatch alarm to send a test notification to AWS Chatbot](#Send-messages-to-chatbot)\.
+Most services supported by AWS Chatbot use Amazon CloudWatch to send alarms or event reports to SNS topics\. To quickly verify that AWS Chatbot is working with your Amazon SNS topics, [you can set up a CloudWatch alarm to send a test notification to AWS Chatbot](#Send-messages-to-chatbot)\.
 
 If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this topic](#AWS::Chatbot::Role)\.
-
-**Topics**
-+ [Prerequisites](#getting-started-prerequisites)
-+ [Testing Notifications from AWS Services to Amazon Chime or Slack Chat Rooms](#Send-messages-to-chatbot)
-+ [Configuring an IAM Role for AWS Chatbot](#AWS::Chatbot::Role)
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
 
@@ -96,10 +91,10 @@ When the alarm triggers for the first time, you should receive the first test no
 
 ## Configuring an IAM Role for AWS Chatbot<a name="AWS::Chatbot::Role"></a>
 
-You can create new IAM roles in the AWS Chatbot console, which provides a convenient way to deploy the AWS Chatbot service\. You associate these roles with your Slack channels or Amazon Chime webhooks\. The AWS Chatbot console does not allow editing of IAM roles, including any roles that you've created in the AWS Chatbot console\. 
+You can create new IAM roles in the AWS Chatbot console, which provides a convenient way to deploy the AWS Chatbot service\. You associate these roles with your Slack channels or Amazon Chime webhooks\. The AWS Chatbot console does not allow editing of IAM roles, including any roles that you've already created in the AWS Chatbot console\. 
 
 **Note**  
-AWS requires that you use the IAM console to edit IAM roles\. If you create roles in the AWS Chatbot console, you need to use the IAM console to edit them\. This might happen, for example, when you are using the AWS Chatbot service and a new release comes out that supports new features requiring a new IAM policy\.
+AWS requires that you use the IAM console to edit IAM roles\. If you create roles in the AWS Chatbot console, you need to use the IAM console to edit them\. This might happen, for example, when you are using the AWS Chatbot service and a new release comes out that supports new features\.
 
 Use the IAM console to edit AWS Chatbot roles\. You can use the entire set of IAM console features to specify permissions for your AWS Chatbot users\.
 
