@@ -242,7 +242,7 @@ You do not need to edit or change the Amazon SNS topics configuration for the Sl
 
 1. Choose **Save**\.
 
-   You can use the IAM console to modify an existing IAM role\. By simply attaching the three additional AWS Chatbot policies to the IAM role, users of that role can immediately begin using commands in the Slack channel\. To do so, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.</para>
+   You can use the IAM console to modify an existing IAM role\. By simply attaching the three additional AWS Chatbot policies to the IAM role, users of that role can immediately begin using commands in the Slack channel\. To do so, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.
 
 **Important**  
 If you have a large number of Slack channels and you want to have the same command permissions across multiple channels, you can apply the configured AWS Chatbot role to any of your other Slack channels without further modification\. The IAM policies will be consistent across Slack channels that support commands in your AWS Chatbot service\.
