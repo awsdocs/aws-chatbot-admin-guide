@@ -100,7 +100,7 @@ Use the IAM console to edit AWS Chatbot roles\. You can use the entire set of IA
 
 **To edit roles**
 
-1. [Log in to the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
+1. [Open the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
 
 1. Choose the Slack channel or Amazon Chime webhook, and choose the IAM role associated with the channel or webhook\. 
 
@@ -110,7 +110,7 @@ Use the IAM console to edit AWS Chatbot roles\. You can use the entire set of IA
 **Note**  
 You can attach AWS managed policies and customer managed policies\. AWS Chatbot roles support both types of IAM policies\.
 
-1. Choose the policy you want by choosing its name\. You can use the **Search** box to search for the policy by its name or by a partial string of characters\. For example, all IAM policies associated with AWS Chatbot includes the character string **Chatbot** as part of the policy name\. Following are the preconfigured customer managed policies available for AWS Chatbot:
+1. Choose the policy you want by choosing its name\. You can use the **Search** box to search for the policy by its name or by a partial string of characters\. For example, all IAM policies associated with AWS Chatbot include the character string **Chatbot** as part of the policy name\. Following are the preconfigured customer managed policies available for AWS Chatbot:
    + **AWS\-Chatbot\-NotificationsOnly\-Policy**
    + **AWS\-Chatbot\-LambdaInvoke\-Policy**
    + **AWS\-Chatbot\-ReadOnly\-Commands\-Policy**
@@ -133,4 +133,5 @@ You can attach AWS managed policies and customer managed policies\. AWS Chatbot 
    After you click **Attach policy**, the role's **Permissions** page opens and shows the change in the **Permissions** list\.
 
 **Note**  
+For more information about the customer managed policies and AWS managed policies described in this section, see [IAM Policies for AWS Chatbot](chatbot-iam-policies.md)\.  
 For more information about editing IAM policies, see [Editing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Exercise caution at all times when editing policies, and don't overwrite existing customer managed policies unless necessary\.

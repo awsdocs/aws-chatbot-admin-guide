@@ -216,7 +216,7 @@ The policy's JSON code is shown following:
 
 If you have existing Slack channels using the AWS Chatbot, you can reconfigure them in a few steps to support the AWS CLI\.
 
-1. [Log in to the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
+1. [Open the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
 
 1. In the **Configured Clients** page, select the **Slack** workspace\. If you have only one workspace, its contents \(the list of Slack channels\) appear on the page\.
 **Note**  

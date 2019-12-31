@@ -127,7 +127,7 @@ You can configure as many channels, with as many topics, as you need\.
 **Note**  
 If you configure a private Slack channel, run the `/invite @AWS` command in Slack to invite the AWS Chatbot to the chat room\.
 
-The SNS topics you choose also must be configured in the services for which you want to receive notifications\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md#related-services.title)\.
+The SNS topics you choose also must be configured in the services for which you want to receive notifications\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
 
 ### Setting Up AWS Chatbot with Amazon Chime<a name="Setting_up_Chime"></a>
 
@@ -186,7 +186,7 @@ For example, in an **Amazon Chime** chat room, one webhook could send notificati
 
 Notifications from supported services that publish to the chosen SNS topics will now appear in the Amazon Chime chat room\.
 
-You can configure as many webhooks as you need\. The SNS topics that you choose also must be configured in the services for which you want to receive notifications\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md#related-services.title)\.
+You can configure as many webhooks as you need\. The SNS topics that you choose also must be configured in the services for which you want to receive notifications\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
 
 **Note**  
 You can configure a Slack channel to run commands to your AWS account\. For more information, see [Running AWS CLI Commands from Slack Channels](chatbot-cli-commands.md)\.
@@ -213,7 +213,7 @@ Before deauthorizing a Slack client, you must delete all Slack channels\. Deleti
 
 You can quickly subscribe existing Amazon SNS topics to the AWS Chatbot service\. You associate the new subscriptions to a Slack channel or Amazon Chime webhook\. After doing so, the messages from those topics will appear in the Slack or Amazon Chime chat rooms\. The Amazon SNS topics must be associated with AWS services that AWS Chatbot supports, and may also require further configuration, such as association with a CloudWatch rule\. This procedure is most useful if you have SNS topics that are already doing significant work with CloudWatch Events and CloudWatch alarms in AWS cloud services supported by AWS Chatbot\.
 
-1. [Log in to the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
+1. [Open the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\.
 
 1. Under **Configured clients**, choose Slack or Amazon Chime\. 
 

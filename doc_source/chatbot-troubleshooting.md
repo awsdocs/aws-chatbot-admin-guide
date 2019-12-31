@@ -13,7 +13,7 @@ AWS Chatbot is in beta and is subject to change\.
 Possible causes: 
 + **The notification's originating service is not supported by AWS Chatbot\.**
 
-  For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md#related-services.title)\.
+  For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
 + **AWS Chatbot supports CloudWatch Events only for specific AWS services\.**
 
   Services that support CloudWatch Events forwarding by Amazon SNS topics to Slack or Amazon Chime chat rooms include:
