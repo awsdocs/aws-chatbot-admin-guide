@@ -1,10 +1,4 @@
---------
-
-AWS Chatbot is in beta and is subject to change\.
-
---------
-
-# Compliance Validation for AWS Chatbot<a name="SERVICENAME-compliance"></a>
+# Compliance validation for AWS Chatbot<a name="chatbot-compliance"></a>
 
 Third\-party auditors assess the security and compliance of AWS Chatbot as part of multiple AWS compliance programs\. These include SOC, PCI, FedRAMP, HIPAA, and others\.
 

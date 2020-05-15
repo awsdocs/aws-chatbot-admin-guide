@@ -1,9 +1,3 @@
---------
-
-AWS Chatbot is in beta and is subject to change\.
-
---------
-
 # Security in AWS Chatbot<a name="security"></a>
 
  At AWS, cloud security is our highest priority\. As an AWS customer, you benefit from a data center and network architecture that we build to meet the requirements of the most security\-sensitive organizations\.
@@ -15,13 +9,13 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation helps you understand how to apply the shared responsibility model when using AWS Chatbot\. The following topics show you how to configure AWS Chatbot to meet your security and compliance objectives\. You also learn how to use other AWS services that help you to monitor and secure your AWS Chatbot resources\. 
 
 **Topics**
-+ [Data Protection in AWS Chatbot](#per-service-security)
++ [Data protection in AWS Chatbot](#per-service-security)
 + [Identity and Access Management for AWS Chatbot](security-iam.md)
-+ [Compliance Validation for AWS Chatbot](SERVICENAME-compliance.md)
++ [Compliance validation for AWS Chatbot](chatbot-compliance.md)
 + [Resilience in AWS Chatbot](disaster-recovery-resiliency.md)
-+ [Infrastructure Security in AWS Chatbot](infrastructure-security.md)
++ [Infrastructure security in AWS Chatbot](infrastructure-security.md)
 
-## Data Protection in AWS Chatbot<a name="per-service-security"></a>
+## Data protection in AWS Chatbot<a name="per-service-security"></a>
 
 AWS Chatbot conforms to the AWS shared responsibility model, which includes regulations and guidelines for data protection\. AWS is responsible for protecting the global infrastructure that runs all of the AWS services\. AWS maintains control over data hosted on this infrastructure, including the security configuration controls for handling customer content and personal data\.
 
@@ -38,7 +32,7 @@ We also recommend that you secure your data in the following ways:
 + Never put sensitive identifying information, such as your customers' account numbers, into free\-form fields such as a **Name** field\. This includes when you work with AWS Chatbot or other AWS services using the console, API, AWS Command Line Interface \(AWS CLI\), or AWS SDKs\. Any data that you enter into AWS Chatbot or other services might get picked up for inclusion in diagnostic logs\.
 + When you provide a URL to an external server, don't include credentials information for validating your request to that server in the URL\. 
 
-For more information about data protection, see the [AWS Shared Responsibility Model and GDPR blog post](https://aws.amazon.com/logs/security/the-aws-shared-responsibility-model-and-gdpr) on the AWS Security Blog\. 
+For more information about data protection, see the [AWS Shared Responsibility Model and GDPR blog post](https://aws.amazon.com/blogs/security/the-aws-shared-responsibility-model-and-gdpr) on the AWS Security Blog\. 
 
 **Note**  
 AWS Chatbot doesn't modify any event, alarm, or other reporting data when it forwards Amazon Simple Notification Service \(Amazon SNS\) notifications to chat rooms\. It treats all notifications as read only\. 

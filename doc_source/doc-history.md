@@ -1,17 +1,11 @@
---------
-
-AWS Chatbot is in beta and is subject to change\.
-
---------
-
-# Document History<a name="doc-history"></a>
-+ **Latest documentation update:** November 22, 2019
+# Document history<a name="doc-history"></a>
 
 The following table describes important changes to the *AWS Chatbot Admin Guide*\. For notifications about documentation updates, you can subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
-| [Updated CLI commands information\.](#doc-history) | Updated CLI commands information to add IAM policy infomation for support tickets, minor updates/edits elsewhere | December 13, 2019 | 
+| [AWS Chatbot general availability release](#doc-history) | Content updates to reflect improvements made to AWS Chatbot during the preview period\. | April 22, 2020 | 
+| [Updated CLI commands information\.](#doc-history) | Updated CLI commands information to add IAM policy information for support tickets, minor updates/edits elsewhere\. | December 13, 2019 | 
 | [Add support for CLI commands in Slack channels\.](#doc-history) | Addition of documentation for configuring support of commands for AWS services in Slack channels\. | November 22, 2019 | 
 | [Announcement of AWS CodeSuite development tools support\.](#doc-history) | Addition of CodeSuite notification support information\. Miscellaneous edits and fixes\. | November 7, 2019 | 
 | [Enhanced troubleshooting information\.](#doc-history) | New Troubleshooting items\. Minor updates and doc linking changes for accuracy\. | August 28, 2019 | 

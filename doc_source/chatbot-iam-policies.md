@@ -1,20 +1,14 @@
---------
-
-AWS Chatbot is in beta and is subject to change\.
-
---------
-
-# IAM Policies for AWS Chatbot<a name="chatbot-iam-policies"></a>
+# IAM policies for AWS Chatbot<a name="chatbot-iam-policies"></a>
 
 This section describes the IAM permissions and policies that AWS Chatbot uses to secure its operations with other AWS services\. AWS Chatbot uses these permissions to safely forward Amazon SNS notifications to chat rooms, support AWS CLI commands sessions in Slack, invoke Lambda functions, and create AWS support tickets directly in the Slack console\. You can also define your own custom policies for the same purposes, using these policies as templates\.
 
 When you create a new role in the AWS Chatbot console, any of the IAM policies described in this topic might be assigned to that role\. You could apply all of them to a single role, or choose only a couple of them based on how the users of that role will use the AWS Chatbot\. Some policies contain a superset of permissions of other policies\. 
 
 **Topics**
-+ [AWS Managed IAM Policies in AWS Chatbot](#aws-managed-policies-for-chatbot)
-+ [Customer Managed IAM Policies in AWS Chatbot](#user-managed-chatbot-iam-policies)
++ [AWS managed IAM policies in AWS Chatbot](#aws-managed-policies-for-chatbot)
++ [Customer managed IAM policies in AWS Chatbot](#user-managed-chatbot-iam-policies)
 
-## AWS Managed IAM Policies in AWS Chatbot<a name="aws-managed-policies-for-chatbot"></a>
+## AWS managed IAM policies in AWS Chatbot<a name="aws-managed-policies-for-chatbot"></a>
 
 AWS Chatbot supports the following AWS managed IAM policies:
 + [**ReadOnlyAccess**](#read-only-access-managed-policy) 
@@ -27,7 +21,7 @@ AWS Chatbot adheres to standard IAM practices for using admin IAM accounts to ac
 
 As a convenience, AWS Chatbot also supports the creation of new IAM roles directly in the AWS Chatbot console\. However, to configure existing IAM entities to use AWS Chatbot, you need to use the IAM console\.
 
-### The IAM ReadOnlyAccess Policy<a name="read-only-access-managed-policy"></a>
+### The IAM ReadOnlyAccess policy<a name="read-only-access-managed-policy"></a>
 
 The **ReadOnlyAccess** policy is an AWS managed policy that is automatically assigned to roles in the AWS Chatbot service\. 
 
@@ -75,7 +69,7 @@ The policy's JSON code is shown following:
 }
 ```
 
-### The CloudWatchReadOnlyAccess Policy<a name="CloudwatchReadOnlyAccess-policy-for-chatbot"></a>
+### The CloudWatchReadOnlyAccess policy<a name="CloudwatchReadOnlyAccess-policy-for-chatbot"></a>
 
 You can attach the **CloudWatchReadOnlyAccess** policy to AWS Chatbot roles when you edit them in the IAM console\. This policy does not appear in the AWS Chatbot console\.
 
@@ -112,7 +106,7 @@ The policy's JSON code is shown following:
 }
 ```
 
-### The AWS Support Command Permissions Policy<a name="chatbot_support_policy"></a>
+### The AWS Support Command Permissions policy<a name="chatbot_support_policy"></a>
 
 The **AWS Support Command Permissions** policy appears in the AWS Chatbot console when you configure resources\. It's provided in the AWS Chatbot console to conveniently set up a role, to allow Slack users to create AWS support tickets through their Slack channels\. 
 
@@ -139,14 +133,14 @@ The policy's JSON code is shown following:
 }
 ```
 
-## Customer Managed IAM Policies in AWS Chatbot<a name="user-managed-chatbot-iam-policies"></a>
+## Customer managed IAM policies in AWS Chatbot<a name="user-managed-chatbot-iam-policies"></a>
 
  AWS Chatbot also supports three service\-provided customer managed IAM policies, that you can apply to any AWS Chatbot role\. They can also be used as templates for defining custom IAM permissions for your users:
 + [**ReadOnly Command Permissions policy**](#read-only-policy-for-cli) 
 + [**Lambda\-Invoke Command Permissions policy**](#lambda-invoke-policy-for-chatbot-cli)
 + [**Notification permissions policy**](#read-only-notifications-policy)
 
-### The AWS Chatbot Read\-Only Command Permissions IAM Policy<a name="read-only-policy-for-cli"></a>
+### The AWS Chatbot Read\-Only Command Permissions IAM policy<a name="read-only-policy-for-cli"></a>
 
 The **Read\-Only Command Permissions** policy appears in the AWS Chatbot console when you configure resources\. You use this policy to support AWS commands and actions in Slack channels\.
 
@@ -197,7 +191,7 @@ The policy's JSON code is shown following:
 }
 ```
 
-### The AWS Chatbot Lambda\-Invoke Command Permissions Policy<a name="lambda-invoke-policy-for-chatbot-cli"></a>
+### The AWS Chatbot Lambda\-Invoke Command Permissions policy<a name="lambda-invoke-policy-for-chatbot-cli"></a>
 
 The **Lambda\-Invoke Command Permissions** policy appears in the AWS Chatbot console when you configure resources\. It pairs with the [**Read\-Only Command Permissions** policy](#read-only-policy-for-cli) to provide a convenient AWS Chatbot configuration to enable Slack channel access to the AWS CLI, and to features that make sense for CLI use\. The policy allows AWS Chatbot users to invoke Lambda functions in their Slack channels\. 
 
@@ -229,7 +223,7 @@ The policy's JSON code is shown following:
 }
 ```
 
-### The AWS Chatbot Notification Permissions IAM Policy<a name="read-only-notifications-policy"></a>
+### The AWS Chatbot Notification Permissions IAM policy<a name="read-only-notifications-policy"></a>
 
 The **Notification Permissions** policy appears in the AWS Chatbot console when you configure resources\. It provides the minimum usable IAM policy configuration for using the AWS Chatbot in Slack channels and Amazon Chime webhooks\. The **Notification Permissions** policy enables AWS Chatbot admins to forward CloudWatch Events, CloudWatch alarms, and format charting data for viewing in chat room messages\. Because many of AWS Chatbot's supported services use CloudWatch as their event and alarm processing layer, AWS Chatbot requires this policy for core functionality\. You can use other policies, such as [**CloudWatchReadOnlyAccess**](#CloudwatchReadOnlyAccess-policy-for-chatbot), in place of this policy, but you must attach that policy to the role in the IAM console\.
 

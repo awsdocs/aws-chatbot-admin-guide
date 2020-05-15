@@ -1,10 +1,4 @@
---------
-
-AWS Chatbot is in beta and is subject to change\.
-
---------
-
-# IAM Resource\-Level Permissions for AWS Chatbot<a name="security_iam_service-with-iam-resource-based-policies"></a>
+# IAM resource\-level permissions for AWS Chatbot<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
 *Resource\-level permissions* define the AWS resources on which you allow assigned entities \(users, groups, and roles\) to perform actions\. You specify the Amazon Resource Name \(ARN\) of one or more resources as part of an IAM policy, which you can then attach to IAM entities\. 
 
@@ -14,10 +8,10 @@ AWS Chatbot doesn't support* resource\-based policies*, which are directly attac
 For more information about the differences between IAM policies and permissions, see [Identity\-Based Policies and Resource\-Based Policies ](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)in the *IAM User Guide*\. The following sections describe how resource\-level permissions work with AWS Chatbot\.
 
 **Topics**
-+ [Using the AWS Chatbot Resource in a Policy](#security_iam_resource-description)
-+ [Example: AWS Chatbot Resource\-Level Permission](#security_iam_resource-based-policy-examples)
++ [Using the AWS Chatbot resource in a policy](#security_iam_resource-description)
++ [Example: AWS Chatbot resource\-level permission](#security_iam_resource-based-policy-examples)
 
-## Using the AWS Chatbot Resource in a Policy<a name="security_iam_resource-description"></a>
+## Using the AWS Chatbot resource in a policy<a name="security_iam_resource-description"></a>
 
 You can set up an IAM policy that defines *who* \(users, groups and roles\) can perform actions on AWS Chatbot resources\. The policy uses *resource\-level permissions* to determine *which* AWS Chatbot resources that users of the IAM policy can work with\. The policy also defines *how* they can work with them \(through Actions and Conditions\)\.
 
@@ -51,7 +45,7 @@ Or:
 **Note**  
 When you create the permissions, ensure that any Actions apply to the correct configuration type\. 
 
-## Example: AWS Chatbot Resource\-Level Permission<a name="security_iam_resource-based-policy-examples"></a>
+## Example: AWS Chatbot resource\-level permission<a name="security_iam_resource-based-policy-examples"></a>
 
 You can use resource\-based permissions to allow or deny access to one or more AWS Chatbot resources in an IAM policy, or to all AWS Chatbot resources\. 
 
