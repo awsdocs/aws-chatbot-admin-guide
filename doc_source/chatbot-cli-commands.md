@@ -1,6 +1,6 @@
 # Running AWS CLI commands from Slack channels<a name="chatbot-cli-commands"></a>
 
-You can run commands using AWS CLI syntax directly in Slack channels for your AWS account\. AWS Chatbot enables you to retrieve diagnostic information, invoke Lambda functions, and create support cases for your AWS resources\. 
+You can run commands using AWS CLI syntax directly in Slack channels\. AWS Chatbot enables you to retrieve diagnostic information, invoke Lambda functions, and create support cases for your AWS resources\. 
 
 When you interact with AWS Chatbot in Slack, it parses your input and prompts you for any missing parameters before it runs the command\. 
 

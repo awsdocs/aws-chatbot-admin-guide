@@ -17,7 +17,7 @@ AWS Chatbot supports the following AWS managed IAM policies:
 
 AWS managed policies are available to all AWS Chatbot users, but you can't change or edit them\. You can copy them and use them as templates for your own policies, knowing that you are using AWS\-approved policy language to build your own policies\.
 
-AWS Chatbot adheres to standard IAM practices for using admin IAM accounts to activate and use the AWS Chatbot service\. You must use your AWS account's root user account login to set up AWS Chatbot\. After doing so, you can configure any IAM entity in your account for use with AWS Chatbot\.
+AWS Chatbot adheres to standard IAM practices for using admin IAM accounts to activate and use the AWS Chatbot service\.
 
 As a convenience, AWS Chatbot also supports the creation of new IAM roles directly in the AWS Chatbot console\. However, to configure existing IAM entities to use AWS Chatbot, you need to use the IAM console\.
 
