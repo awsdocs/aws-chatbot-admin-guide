@@ -36,7 +36,6 @@ When you create an AWS Chatbot configuration, it creates the following policy fo
 
 ```
 {
-
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -54,9 +53,9 @@ When you create an AWS Chatbot configuration, it creates the following policy fo
             "Effect": "Allow",
             "Action": [
               "logs:PutLogEvents",
-              "logs:CreateLogStream"
-              "logs:DescribeLogStreams"
-              "logs:CreateLogGroup"
+              "logs:CreateLogStream",
+              "logs:DescribeLogStreams",
+              "logs:CreateLogGroup",
               "logs:DescribeLogGroups"
             ],
             "Resource": "arn:aws:logs:*:*:log-group:/aws/chatbot/*"
