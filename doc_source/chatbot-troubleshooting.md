@@ -99,3 +99,10 @@ For example, the policy below allows AWS Chatbot in **us\-east\-2** but denies o
     ]
 }
 ```
+
+## I get an "Event received is not supported" error\.<a name="chatbot-troubleshooting-unsupported-event-error"></a>
+
+**Possible causes**
++ **The notification's originating service is not supported by AWS Chatbot\.**
+
+  For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.

@@ -203,7 +203,7 @@ You only have to invite AWS Chatbot to the channel once\.
 1. Enter the following command in Slack:
 
    ```
-   @aws Lamda invoke --function-name myHelloWorld --region <your region>
+   @aws lambda invoke --function-name myHelloWorld --region <your region>
    ```
 **Important**  
 Replace *<your region>* with the same AWS Region you set while using the Lambda, CloudWatch, and AWS Chatbot consoles\. You only need to specify the AWS Region in the channel once when you type your first AWS CLI command in Slack\.

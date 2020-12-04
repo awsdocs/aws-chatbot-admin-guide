@@ -37,6 +37,54 @@ The following limitations apply to running AWS CLI commands in your Slack chat r
 + You can create AWS support cases through your Slack channels\. You cannot add attachments to these cases from the Slack channel\.
 + Slack channels do not support standard AWS CLI pagination\. 
 
+AWS Chatbot does not support commands denied by the following IAM policy:
+
+```
+{
+  "Statement": [
+    {
+      "Action": [
+        "appsync:ListApiKeys",
+        "chatbot:*",
+        "codecommit:GetFile",
+        "codecommit:GetCommit",
+        "codecommit:GetDifferences",
+        "cognito-idp:*",
+        "cognito-identity:*",
+        "connect:GetFederationToken",
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetItem",
+        "ec2:GetPasswordData",
+        "ecr:GetAuthorizationToken",
+        "ecr:GetLogin",
+        "gamelift:RequestUploadCredentials",
+        "gamelift:GetInstanceAccess",
+        "lightsail:DownloadDefaultKeyPair",
+        "lightsail:GetInstanceAccessDetail",
+        "lightsail:GetKeyPair",
+        "lightsail:GetKeyPairs",
+        "iam:*",
+        "kms:*",
+        "redshift:GetClusterCredentials",
+        "sdb:*",
+        "secretsmanager:*",
+        "sso:*",
+        "sso-admin:*",
+        "sso-oidc:*",
+        "storagegateway:DescribeChapCredentials",
+        "sts:*",
+        "s3:GetObject",
+        "s3:HeadObject",
+        "snowball:GetJobUnlockCode"
+      ],
+      "Effect": "Deny",
+      "Resource": "*"
+    }
+  ],
+  "Version": "2012-10-17"
+}
+```
+
 ## Managing permissions for running commands using AWS Chatbot<a name="iam-policies-for-slack-channels-cli-support"></a>
 
 With AWS Identity and Access Management \(IAM\), you can use *identity\-based policies*, which are JSON permissions policy documents, and attach them to an *identity*, such as an IAM user, role, or group\. These policies control what actions an identity can perform\. AWS Chatbot provides three IAM policies in the AWS Chatbot console, that you can use to quickly set up AWS CLI commands support for Slack channels\. Those policies include:
@@ -91,7 +139,7 @@ The **ReadOnly Command Permissions** policy JSON code is shown following:
                 "gamelift:RequestUploadCredentials",
                 "gamelift:GetInstanceAccess",
                 "lightsail:DownloadDefaultKeyPair",
-                "lightsail:GetInstanceAccessDetail",
+                "lightsail:GetInstanceAccessDetails",
                 "lightsail:GetKeyPair",
                 "lightsail:GetKeyPairs",
                 "redshift:GetClusterCredentials",
