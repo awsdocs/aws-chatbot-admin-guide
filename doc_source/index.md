@@ -1,7 +1,7 @@
 # AWS Chatbot Administrator Guide
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -17,6 +17,7 @@ Amazon's trademarks and trade dress may not be used in
 + [What is AWS Chatbot?](what-is.md)
 + [Setting up AWS Chatbot](setting-up.md)
 + [Getting started with AWS Chatbot](getting-started.md)
+   + [Test notifications from AWS services to Amazon Chime or Slack using CloudWatch](test-notifications-cw.md)
 + [Using AWS Chatbot with other AWS services](related-services.md)
 + [Using AWS Chatbot with Slack](chatbot-slack-lambda-integration.md)
    + [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md)

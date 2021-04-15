@@ -1,41 +1,35 @@
 # Tutorial: Using AWS Chatbot to run an AWS Lambda function remotely<a name="chatbot-run-lambda-function-remotely-tutorial"></a>
 
-In this tutorial you use AWS Chatbot to run a Lambda function remotely and check the status of the Lambda function using Amazon CloudWatch\. There are steps at the end of this tutorial to delete the resources you created\. 
+In this tutorial you use AWS Chatbot to run a Lambda function remotely and check the status of the Lambda function using Amazon CloudWatch\. A Lambda function is a self contained block of organized resuable code that you write\. Lambda functions are useful because they are run without provisioning or managing servers\. Additionally, they are only invoked when needed based on your specifications\. There are steps at the end of this tutorial to delete the resources you created\. 
 
-You perform the following steps in this tutorial:
 
-1. Create a Lambda function\.
 
-1. Configure a CloudWatch alarm on the **Errors** metric of your Lambda function to post a message to your Amazon Simple Notification Service \(Amazon SNS\) topic when AWS Lambda emits error metrics to CloudWatch\. 
 
-1. Configure a Slack channel with AWS Chatbot\.
-
-1. Subscribe your chatbot to the Amazon SNS topic to receive CloudWatch alarm notifications in Slack\.
-
-1. Test your Lambda function and CloudWatch alarm in Slack using the AWS Chatbot\.
 
 **Topics**
 + [Prerequisites](#prerequisites)
-+ [Create a Lambda function](#create-lambda-function)
-+ [Create an SNS topic](#create-sns-topic)
-+ [Configure a CloudWatch alarm](#configure-cloudwatch-alarm)
-+ [Configure a Slack client for AWS Chatbot](#create-chatbot-slack-config)
-+ [Invoke a Lambda function from Slack](#invoke-lambda-function)
-+ [Test the CloudWatch alarm](#test-cloudwatch-alarm)
-+ [Clean up resources](#clean-up-resources)
++ [Step 1: Create a Lambda function](#create-lambda-function)
++ [Step 2: Create an SNS topic](#create-sns-topic)
++ [Step 3: Configure a CloudWatch alarm](#configure-cloudwatch-alarm)
++ [Step 4: Configure a Slack client for AWS Chatbot](#create-chatbot-slack-config)
++ [Step 5: Invoke a Lambda function from Slack](#invoke-lambda-function)
++ [Step 6: Test the CloudWatch alarm](#test-cloudwatch-alarm)
++ [Step 7: Clean up resources](#clean-up-resources)
 
 ## Prerequisites<a name="prerequisites"></a>
 
 This tutorial assumes that you have some familiarity with the Lambda, AWS Chatbot, and CloudWatch consoles\. 
+
+
 
 For more information, see the following topics:
 + [Getting started with AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) in the *AWS Lambda Developer Guide*\.
 + [Setting up AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up.html) in the *AWS Chatbot Administrator Guide\.*
 + [Getting Set Up with CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/GettingSetup.html) in the *Amazon CloudWatch User Guide\.* 
 
-The AWS Region that you select while setting up these consoles should be the same Region you specify in your Slack channel when your first AWS Command Line Interface \(AWS CLI\) command in [Invoke a Lambda function from Slack](#invoke-lambda-function)\. 
+The AWS Region that you select while setting up these consoles should be the same Region you specify in your Slack channel when your first AWS Command Line Interface \(AWS CLI\) command in [Step 5: Invoke a Lambda function from Slack](#invoke-lambda-function)\. 
 
-## Create a Lambda function<a name="create-lambda-function"></a>
+## Step 1: Create a Lambda function<a name="create-lambda-function"></a>
 
 In this procedure you create a Lambda function in the console and test it\.
 
@@ -47,7 +41,7 @@ In this procedure you create a Lambda function in the console and test it\.
 
 1. Choose **Author From Scratch**\.
 
-1. In **Function Name**, enter: **myhelloWorld**
+1. In **Function Name**, enter: **myHelloWorld**
 
 1. Choose **Create Function**\.
 
@@ -60,6 +54,8 @@ In this procedure you create a Lambda function in the console and test it\.
       };
    ```
 
+1. Choose **Deploy** and confirm your changes have been deployed by viewing the label next to the **Deploy** button\.
+
 1. Choose **Test**\.
 
 1. In **Event Name**, enter: **myHelloWorld**
@@ -70,9 +66,9 @@ In this procedure you create a Lambda function in the console and test it\.
 
 1. Choose **Save**\.
 
-## Create an SNS topic<a name="create-sns-topic"></a>
+## Step 2: Create an SNS topic<a name="create-sns-topic"></a>
 
-CloudWatch uses Amazon SNS to send notifications\. First, you create an SNS topic and subscribe to it using your email\. Later in the tutorial you use this topic to configure AWS Chatbot\.
+CloudWatch uses Amazon SNS to send notifications\. First, you create an SNS topic and subscribe to it using your email\. Later in the tutorial you use this SNS topic to configure AWS Chatbot\.
 
 **To create an SNS topic**
 
@@ -84,9 +80,11 @@ CloudWatch uses Amazon SNS to send notifications\. First, you create an SNS topi
 
 1. Create a topic with the following settings:
 
-   1. **Name** \- **myHelloWorldNotifications**
+   1. **Type** – Standard
 
-   1. **Display name ** \- **myHelloWorld**
+   1. **Name** – **myHelloWorldNotifications**
+
+   1. **Display name ** – **myHelloWorld**
 
 1. Choose **Create topic**\.
 
@@ -94,15 +92,15 @@ CloudWatch uses Amazon SNS to send notifications\. First, you create an SNS topi
 
 1. Create a subscription with the following settings:
 
-   1. **Protocol ** \- **Email**
+   1. **Protocol ** – **Email**
 
-   1. **Endpoint ** \- Your email address
+   1. **Endpoint ** – Your email address
 
 1. Confirm subscription to the SNS by checking your email and choosing the link\.
 
-## Configure a CloudWatch alarm<a name="configure-cloudwatch-alarm"></a>
+## Step 3: Configure a CloudWatch alarm<a name="configure-cloudwatch-alarm"></a>
 
-A CloudWatch alarm can monitor your Lambda function and send a notification if an error occurs\.
+A CloudWatch alarm monitors your Lambda function and sends a notification if an error occurs\.
 
 **To create a CloudWatch alarm**
 
@@ -122,21 +120,23 @@ A CloudWatch alarm can monitor your Lambda function and send a notification if a
 
 1. Change the following settings:
 
-   1. **Period** \- **1 minute**
+   1. **Period** – **1 minute**
 
-   1. **Threshold** \- Whenever errors is > **0**
+   1. **Whenever Errors is** **Greater** **than** **0**
 
-   1. **Send notifications to** \- **myHelloWorldNotifications**
+   1. **Send notifications to** – **myHelloWorldNotifications**
 
-   1. **Name** \- **myHelloWorld\-alarm**
+   1. **Alarm name** – **myHelloWorld\-alarm**
 
-   1. **Description** \- **Lambda myHelloWorld alarm**
+   1. **Alarm description** – **Lambda myHelloWorld alarm**
 
 1. Choose **Create alarm**\.
 
-## Configure a Slack client for AWS Chatbot<a name="create-chatbot-slack-config"></a>
+## Step 4: Configure a Slack client for AWS Chatbot<a name="create-chatbot-slack-config"></a>
 
-Configuring a Slack client using AWS Chatbot enables you to run different commands in Slack using the AWS CLI\. In this tutorial you use AWS CLI to invoke your Lambda function from Slack\.
+You can configure a Slack client using AWS Chatbot to to run different commands in Slack using the AWS CLI\. In this tutorial you use AWS CLI to invoke your Lambda function from Slack\.
+
+
 
 **To create a Slack client**
 
@@ -154,9 +154,7 @@ There's no limit to the number of workspaces that you can set up for AWS Chatbot
 
 1. Choose **Configure new channel**\.
 
-1. Under **Configuration details**, enter the following details:
-
-   1. **Name** \- **myHelloWorld**
+1. Under **Configuration details**, for **Name**, enter **myHelloWorld**\.
 
 1. Under **Channel type**, choose **Private**\.
 
@@ -186,9 +184,9 @@ There's no limit to the number of workspaces that you can set up for AWS Chatbot
 
 1. Choose **Configure**\.
 
-## Invoke a Lambda function from Slack<a name="invoke-lambda-function"></a>
+## Step 5: Invoke a Lambda function from Slack<a name="invoke-lambda-function"></a>
 
-You can invoke Lambda functions from Slack using AWS CLI syntax after configuring a chatbot in AWS Chatbot\. To interact with AWS Chatbot in Slack, enter **@aws** followed by an AWS CLI command\. For more information, see [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md) in the *AWS Chatbot Administrator Guide\.* 
+After you configure a chatbot in AWS Chatbot, you can invoke Lambda functions from Slack using AWS CLI syntax\. To interact with AWS Chatbot in Slack, enter **@aws** followed by an AWS CLI command\. For more information, see [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md) in the *AWS Chatbot Administrator Guide\.* 
 
 **To invoke a Lambda function**
 
@@ -198,7 +196,8 @@ You can invoke Lambda functions from Slack using AWS CLI syntax after configurin
 
    1. Choose **Invite to Channel\.**
 **Tip**  
-You only have to invite AWS Chatbot to the channel once\.
+You only have to invite AWS Chatbot to the channel once\.  
+If AWS is not listed as a valid member of the channel, you need to add the AWS Chatbot app to the Slack workspace\. For more information, see the [Getting started guide for AWS Chatbot](getting-started.md)\. 
 
 1. Enter the following command in Slack:
 
@@ -216,7 +215,7 @@ AWS Chatbot also supports certain simplified AWS CLI syntaxes\. For example, the
 
 1. Choose **Yes**\.
 
-1. The output is shown following:
+1. The following output is shown:
 
    ```
    ExecutedVersion: $LATEST
@@ -225,13 +224,15 @@ AWS Chatbot also supports certain simplified AWS CLI syntaxes\. For example, the
    ```
 
 **Troubleshooting**  
-If you try to run your Lambda function in Slack and you encounter errors referring to the following permissions, revisit step 8 of the [ Configure a Slack client for AWS Chatbot](#create-chatbot-slack-config) procedure and verify that you have the correct permissions assigned to your role:
+If you try to run your Lambda function in Slack and you encounter errors referring to the following permissions, revisit step 8 of the [ Step 4: Configure a Slack client for AWS Chatbot](#create-chatbot-slack-config) procedure and verify that you have the correct permissions assigned to your role:
 + **Lambda\-invoke command permissions**
 + **Read\-only command permissions**
 
-## Test the CloudWatch alarm<a name="test-cloudwatch-alarm"></a>
+## Step 6: Test the CloudWatch alarm<a name="test-cloudwatch-alarm"></a>
 
 In this step, you update the myHelloWorld function so that it returns an error, which triggers the CloudWatch alarm\. By testing the alarm you can confirm that it's configured correctly and that you can view CloudWatch alarms in Slack \(in addition to logs\)\. 
+
+
 
 **To test the CloudWatch alarm**
 
@@ -247,7 +248,7 @@ In this step, you update the myHelloWorld function so that it returns an error, 
    };
    ```
 
-1. Choose **Save**\.
+1. Choose **Deploy** and confirm your changes have been deployed by viewing the label next to the **Deploy** button\.
 
 1. Return to your Slack channel and then enter the following command: 
 
@@ -255,16 +256,18 @@ In this step, you update the myHelloWorld function so that it returns an error, 
    @aws invoke myHelloWorld
    ```
 
-1. This triggers an error in your output, and it sends a CloudWatch alarm notification in Slack and an email indicating this\. It might take a few minutes for you to receive the notifications\.
+1. An error appears in your output, and you receive a CloudWatch alarm notification in Slack and an email\. It might take a few minutes for you to receive the notifications\.
 
 1. To view logs, choose **Show logs** or **Show error logs**\.
 
 **Troubleshooting**  
-If you don't receive a notification in Slack or an email from CloudWatch, navigate to the CloudWatch console and check **ALARMS** under the **Alarm** menu on the left of the screen to confirm that your alarm has triggered\. 
+If you don't receive a notification in Slack or an email from CloudWatch, navigate to the CloudWatch console and on the left of the screen\. Under **Alarms**, choose **In alarm** to confirm that your alarm has triggered\. Your alarm name should appear on this page if it has been triggered successfully\.
 
-## Clean up resources<a name="clean-up-resources"></a>
+## Step 7: Clean up resources<a name="clean-up-resources"></a>
 
-You can remove any resources created for this tutorial that you don't want to keep by navigating to the specific service’s console and deleting the resource\.
+You can remove any resources created for this tutorial that you don't want to keep by navigating to the specific service’s console and deleting the resource\.  Removing unwanted or unused resources is beneficial because it lowers overall costs to you\.
+
+
 
 **To delete the Lambda function**
 

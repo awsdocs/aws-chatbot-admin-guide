@@ -8,8 +8,13 @@ When you create a new Amazon SNS topic, your services will require additional co
 + [AWS Billing and Cost Management](#aws-billing)
 + [AWS CloudFormation](#cloud-formation)
 + [Notifications for AWS developer tools](#codeserviceevents)
-+ [Amazon CloudWatch Alarms](#cloudwatch)
++ [Amazon CloudWatch alarms](#cloudwatch)
 + [Amazon CloudWatch Events](#cloudwatchevents)
++ [[AWS Config](https://console.aws.amazon.com/config/)](#aws-config)
++ [[Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)](#aws-guardduty)
++ [[AWS Health](https://phd.aws.amazon.com/phd/home#/)](#aws-health)
++ [[AWS Security Hub](https://console.aws.amazon.com/securityhub/)](#security-hub)
++ [[AWS Systems Manager](https://console.aws.amazon.com/systems-manager/)](#system-manager)
 
 You can set up the following AWS services to forward notifications to Amazon Chime or Slack chat rooms\.
 
@@ -29,9 +34,14 @@ AWS Chatbot supports AWS CloudFormation notifications through Amazon SNS topics\
 
 AWS provides a suite of cloud\-based developer tools for creating, managing, and working with software development projects\. The AWS development tools suite includes AWS services such as AWS CloudFormation stacks, AWS CodeBuild, AWS CodeCommit, AWS CodeDeploy, AWS CodePipeline, and more\. You can redirect Amazon SNS topic subscriptions for these services to AWS Chatbot\. For example, if you want notifications about events in an AWS CodeCommit repository or in a pipeline in AWS CodePipeline to appear in a Slack channel for your development teams, you can set up notifications for those resources in the Developer Tools console, and then integrate the SNS topic used for those notifications with AWS Chatbot\. For more information, see [Configure Integration Between Notifications and AWS Chatbot](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/notifications-chatbot.html) in the *Developer Tools Console User Guide*\.
 
-## Amazon CloudWatch Alarms<a name="cloudwatch"></a>
+## Amazon CloudWatch alarms<a name="cloudwatch"></a>
 
-To monitor performance and operating metrics for AWS services, and send notifications when thresholds are breached, you can create alarms in Amazon CloudWatch\. CloudWatch sends an Amazon SNS notification or performs an action when the alarm changes state\. The `Alarms` action sends notifications to an Amazon SNS topic that forwards the notification to AWS Chatbot for viewing in chat rooms\.
+To monitor performance and operating metrics for AWS services, and send notifications when thresholds are breached, you can create alarms in Amazon CloudWatch\. CloudWatch sends an Amazon SNS notification or performs an action when the alarm changes state\.
+
+CloudWatch also features composite alarms\. Composite alarms allow you to combine multiple alarms to reduce alarm noise and focus on critical operational issues\. You can easily combine multiple alarms together into alarm hierarchies that only trigger once, when multiple alarms fire at the same time\. Composite alarms are currently supported by AWS Chatbot\.
+
+**Note**  
+Parent composite alarms can have multiple triggering children however, the AWS Chatbot notification will only display a maximum of 3 of the total triggering metric children's alarm states\. For example, if you have 10 total children alarms and 5 are currently triggered, the AWS Chatbot notification will display 3 of those 5\.
 
 Any metric, for any AWS service, that CloudWatch alarm actions can report can also be shared by an SNS topic to chat rooms through AWS Chatbot\. This includes alarms for services such as Amazon Elastic Compute Cloud \(Amazon EC2\)\. 
 
@@ -49,7 +59,7 @@ You map the Amazon SNS topic to the CloudWatch Events rule, and then map it to a
 
 AWS Chatbot supports CloudWatch Events for the following AWS services: AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\.
 
-### [AWS Config](https://console.aws.amazon.com/config/)<a name="aws-config"></a>
+## [AWS Config](https://console.aws.amazon.com/config/)<a name="aws-config"></a>
 
 AWS Config performs resource oversight and tracking for auditing and compliance, config change management, troubleshooting, and security analysis\. It provides a detailed view of AWS resources configuration in your AWS account\. The service also shows how resources relate to one another and how they were configured in the past, so you can see how configurations and relationships change over time\. 
 
@@ -57,7 +67,7 @@ For AWS Config monitoring, [you configure Amazon CloudWatch Events rules](https:
 
  For more information, see [ Notifications for AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/notifications-for-AWS-Config.html) in the *AWS Config Developer Guide*\.
 
-### [Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)<a name="aws-guardduty"></a>
+## [Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)<a name="aws-guardduty"></a>
 
 Amazon GuardDuty is a security threat monitoring service that detects and reports on potential security threats in your AWS account\. It uses threat intelligence feeds, such as lists of malicious IPs and domains, and machine learning to identify possible unauthorized and malicious activity in your AWS environment\.
 
@@ -65,7 +75,7 @@ GuardDuty reports its security incidents and threats through *findings*\. Findin
 
  For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) in the *Amazon GuardDuty User Guide*\.
 
-### [AWS Health](https://phd.aws.amazon.com/phd/home#/)<a name="aws-health"></a>
+## [AWS Health](https://phd.aws.amazon.com/phd/home#/)<a name="aws-health"></a>
 
 AWS Health provides visibility into the state of your AWS resources, services, and accounts\. It provides information about the performance and availability of resources that affect your applications running on AWS and guidance for remediation\. AWS Health provides this information in a console called the Personal Health Dashboard \(PHD\)\. 
 
@@ -73,7 +83,7 @@ AWS Health directly supports CloudWatch Events notifications\. You configure [Cl
 
 For more information, see [Monitoring AWS Health Events with Amazon CloudWatch Events](https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html) in the *AWS Health User Guide*\.
 
-### [AWS Security Hub](https://console.aws.amazon.com/securityhub/)<a name="security-hub"></a>
+## [AWS Security Hub](https://console.aws.amazon.com/securityhub/)<a name="security-hub"></a>
 
 AWS Security Hub provides a comprehensive view of high\-priority security alerts and compliance status across your AWS accounts\. Security Hub aggregates, organizes, and prioritizes security findings from multiple AWS services, including Amazon GuardDuty, Amazon Inspector, and Amazon Macie\. Security Hub reduces the effort of collecting and prioritizing security findings across accounts, from AWS services, and from AWS partner tools\. 
 
@@ -81,7 +91,7 @@ Security Hub supports two types of integration with [CloudWatch Events rules](ht
 + **Standard CloudWatch Events**\. [Security Hub automatically sends all findings to CloudWatch Events](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cloudwatch-events.html)\. You can define CloudWatch Events rules that automatically route generated findings to an Amazon Simple Storage Service \(Amazon S3\) bucket, a remediation workflow, or an SNS topic\. Use this method to automatically send all Security Hub findings, or all findings with specific characteristics, to an SNS topic to which AWS Chatbot subscribes\.
 + **Security Hub Custom Actions**\.[ Define custom actions in Security Hub](https://aws.amazon.com/blogs/apn/how-to-enable-custom-actions-in-aws-security-hub/) and configure [CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) to respond to those actions\. The event rule uses its SNS topic setting to forward its notifications to the SNS topic to which AWS Chatbot subscribes\. 
 
-### [AWS Systems Manager](https://console.aws.amazon.com/systems-manager/)<a name="system-manager"></a>
+## [AWS Systems Manager](https://console.aws.amazon.com/systems-manager/)<a name="system-manager"></a>
 
 AWS Systems Manager lets you view and control your infrastructure on AWS\. Using the Systems Manager console, you can view operational data from multiple AWS services and automate operational tasks across your AWS resources\. Systems Manager helps you maintain security and compliance by scanning your managed instances, and reporting or taking corrective action on detected policy violations\.
 

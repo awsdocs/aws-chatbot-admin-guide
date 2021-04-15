@@ -45,7 +45,7 @@ To use AWS Chatbot, you need the following:
 
 To access Amazon CloudWatch metrics, AWS Chatbot requires an AWS Identity and Access Management \(IAM\) role with a permissions policy and a trust policy\. You create this IAM role, with the required policies, [using the AWS Chatbot console](https://us-east-2.console.aws.amazon.com/chatbot/home?region=us-east-2#/chat-clients)\. You can use an existing IAM role, but it must have the required policies\.
 
-For testing, we recommend using the role that you create with the AWS Chatbot console\. To use an existing IAM role, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.
+For testing, we recommend using the role that you create with the AWS Chatbot console\. To use an existing IAM role, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#editing-iam-roles-for-chatbot)\.
 
 ## Accessing AWS Chatbot<a name="chatbot-access"></a>
 

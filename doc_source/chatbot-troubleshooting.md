@@ -4,9 +4,15 @@ AWS Chatbot operates with several AWS services, including Amazon CloudWatch, Ama
 
 ## Notifications aren't sent to chat rooms\.<a name="chatbot-subcription-troubleshooting-chat-rooms-not-receiving-notifications"></a>
 
-If you configured your AWS service to send notifications to the Amazon Simple Notification Service \(Amazon SNS\) topics mapped to AWS Chatbot, but the notifications aren't appearing in the chat rooms use these steps to troubleshoot\.
+If you configured your AWS service to send notifications to the Amazon Simple Notification Service \(Amazon SNS\) topics mapped to AWS Chatbot, but the notifications aren't appearing in the chat rooms or channels, try the steps below\.
 
 **Possible causes** 
++ **There is no connectivity\.**
+
+  Test your connectivity and your AWS Chatbot configuration by using the **Send test message button** in the [AWS Chatbot console](https://console.aws.amazon.com/chatbot/)\. For more information, see [Test notifications from AWS services to Amazon Chime or Slack](getting-started.md#test-notifications)\. 
++ **The bot is not invited to the channel\.**
+
+  Ensure that the AWS Chatbot app \("@aws"\) is added to the Slack channel\. If it hasn't, in Slack, add the AWS Chatbot app by choosing **Add apps** from the channel's **Details** screen\.
 + **The notification's originating service is not supported by AWS Chatbot\.**
 
   For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
@@ -29,6 +35,9 @@ Some AWS services support Amazon CloudWatch alarms for reporting and monitoring\
 + **The SNS topic doesn't have a subscription to AWS Chatbot\.**
 
   In the Amazon SNS console, go to the **Topics** page, choose the **Subscriptions** tab, and then verify that the topic has a subscription\. If the topic doesn't, open the AWS Chatbot console, open your authorized client, and then look at the **Configured channels** or **Configured webhooks** list\. Add a new channel or webhook configuration, and then add the SNS topic\. Without this configuration, event notifications can't reach the chat rooms\. 
++ **The Amazon SNS topic has server\-side encryption turned on\.**
+
+  If you have server\-side encryption turned on for your Amazon SNS topics, they will not appear in your chat rooms\. You can resolve this by turning off server\-side encryption for your Amazon SNS topics\. For information on how to disable server\-side encryption for your Amazon SNS topics, see [Enabling server\-side encryption \(SSE\) for an Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/dg/sns-enable-encryption-for-topic.html) in the *Amazon Simple Notification Service Developer Guide*\.
 + **Your SNS topic subscription to the AWS Chatbot has the Enable raw message delivery setting enabled\.**
 
   Don't enable the **Enable raw message delivery** feature for any SNS topic subscriptions to AWS Chatbot\.
@@ -41,7 +50,7 @@ Some AWS services support Amazon CloudWatch alarms for reporting and monitoring\
 **Possible causes**
 + **The IAM role doesn’t have CloudWatchRead permissions\. **
 
-  In the AWS Chatbot console, create a new role\. This role requires the Notifications permissions policy from the AWS Chatbot console when you configure a new webhook or Slack channel\. You can also edit your IAM role to [add the CloudWatchRead permissions](getting-started.md#AWS::Chatbot::Role) for AWS Chatbot\.
+  In the AWS Chatbot console, create a new role\. This role requires the Notifications permissions policy from the AWS Chatbot console when you configure a new webhook or Slack channel\. You can also edit your IAM role to [add the CloudWatchRead permissions](getting-started.md#editing-iam-roles-for-chatbot) for AWS Chatbot\.
 + **AWS Chatbot doesn't have access to all AWS Regions\.**
 
   AWS Chatbot may execute API calls from any nearby AWS Region\. If any Region is disabled, you may experience problems with CloudWatch metrics graphs, among other issues\. For more information, see [I get AccessDenied or permissions errors\.](#chatbot-troubleshooting-regions)
@@ -106,3 +115,32 @@ For example, the policy below allows AWS Chatbot in **us\-east\-2** but denies o
 + **The notification's originating service is not supported by AWS Chatbot\.**
 
   For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
+
+## I get an "A valid member name is required" error\.<a name="chatbot-troubleshooting-valid-member-name-required-error"></a>
+
+**Possible causes**
++ **The AWS Chatbot app is not added to the Slack workspace\.**
+
+  Add the AWS Chatbot app to the Slack workspace\. For more information, see the [Getting started guide for AWS Chatbot](getting-started.md)\.
+
+## I get a Slack error saying "You are not authorized to install AWS Chatbot on AWS\."<a name="chatbot-troubleshooting-scope-change"></a>
+
+**Possible causes**
++ **A new scope change requires administrator approval\.**
+
+  There may be a new scope added to the AWS Chatbot Slack application that requires approval by an administrator\. If AWS Chatbot has released a new scope, administrators need to re\-approve the AWS Chatbot Slack application\. Note that the approval is only required for Slack workspaces with an app approval policy\.
+
+  Workspace administrators can check their workspace settings to review and approve new scopes for AWS Chatbot\. For more information about how to approve an app, see [Approve an app for your org](https://slack.com/help/articles/360000281563-Manage-apps-on-Enterprise-Grid#approve-or-restrict-an-app) in the Slack Help Center\.
++ **Installation of the AWS Chatbot Slack app is restricted for your workspace\.**
+
+  This error may appear if the workspace administrator has explicitly restricted the installation of the AWS Chatbot Slack app\.
+
+## Provide feedback<a name="feedback"></a>
+
+You can provide feedback about AWS Chatbot directly from your Amazon Chime chat room, Slack channel, or from the AWS Chatbot console\. To leave feedback from your Amazon Chime chat room or Slack channel, type the following command and replace *comments* with your own information\.
+
+```
+@aws feedback comments
+```
+
+To leave feedback from the AWS Chatbot console, navigate to the [AWS Chatbot console](https://console.aws.amazon.com/chatbot/) and choose the **Feedback** link at the bottom of the console\. All feedback is sent directly to and reviewed by the AWS Chatbot team\.

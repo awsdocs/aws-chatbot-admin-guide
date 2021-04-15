@@ -10,6 +10,9 @@ After you set up the AWS Chatbot in your Slack workspace, you run commands in Sl
 
 `@aws`
 
+**Note**  
+If AWS is not listed as a valid member of the channel, you need to add the AWS Chatbot app to the Slack workspace and invite it to the channel\. For more information, see the [Getting started guide for AWS Chatbot](getting-started.md)\.
+
 The AWS Chatbot command syntax is the same as you would use in a terminal:
 
 `@aws service command --options`
@@ -104,7 +107,7 @@ You can use these IAM policies as templates to define your own policies\. For ex
 
 You can define custom permissions in a policy to limit actions to specific resources in your AWS account\. These are called *resource\-based permissions*\. For more information on defining resources in a policy, see the section [IAM JSON Policy Elements: Resource](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_resource.html) in the *IAM User Guide*\.
 
-For more information on these policies, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.
+For more information on these policies, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#editing-iam-roles-for-chatbot)\.
 
 ### Using the AWS Chatbot read\-only command permissions policy<a name="about-readonlycommand-chatbot-policy"></a>
 
@@ -212,6 +215,18 @@ To see alarms from a different AWS Region, include that Region in the command:
 
 `@aws cloudwatch describe-alarms --state ALARM --region us-east-1`
 
+You can also filter AWS CLI output by using the optional `query` parameter\. A query uses JMESPath syntax to create an expression to filter your output to your specifications\. For more information about filtering, see [Filtering AWS CLI output](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html) in the *AWS Command Line Interface User Guide*\. For more information about JMESPath syntax, see [their website](https://jmespath.org/)\. The following example shows how to limit AWS CLI output for the `cloudwatch describe-alarms` command to just the alarm name, description, state, and reason attributes\.
+
+```
+@AWS cloudwatch describe-alarms --query 
+ @.{MetricAlarms:MetricAlarms[*].
+ {AlarmName:AlarmName, AlarmDescription:AlarmDescription, StateValue:StateValue, 
+ StateReason:StateReason, Namespace:Namespace, MetricName:MetricName, 
+ Dimensions:Dimensions, ComparisonOperator:ComparisonOperator, Threshold:Threshold, 
+ Period:Period, EvaluationPeriods:EvaluationPeriods, Statistic:Statistic}} 
+ --region us-east-2
+```
+
 ### Displaying Amazon CloudWatch Logs information<a name="logs-in-the-chat-window.title"></a>
 
 CloudWatch alarm notifications show buttons in Slack notifications to view logs related to the alarm\. These notifications use the [CloudWatch Log Insights feature](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html)\. There may be service charges for using this feature to query and show logs\.
@@ -287,7 +302,7 @@ You do not need to edit or change the Amazon SNS topics configuration for the Sl
 
 1. Choose **Save**\.
 
-   You can use the IAM console to modify an existing IAM role\. By simply attaching the three additional AWS Chatbot policies to the IAM role, users of that role can immediately begin using commands in the Slack channel\. To do so, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#AWS::Chatbot::Role)\.
+   You can use the IAM console to modify an existing IAM role\. By simply attaching the three additional AWS Chatbot policies to the IAM role, users of that role can immediately begin using commands in the Slack channel\. To do so, see [Configuring an IAM Role for AWS Chatbot](getting-started.md#editing-iam-roles-for-chatbot)\.
 
 **Important**  
 If you have a large number of Slack channels and you want to have the same command permissions across multiple channels, you can apply the configured AWS Chatbot role to any of your other Slack channels without further modification\. The IAM policies will be consistent across Slack channels that support commands in your AWS Chatbot service\.

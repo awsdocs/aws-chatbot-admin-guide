@@ -17,6 +17,8 @@ You can set up an IAM policy that defines *who* \(users, groups and roles\) can 
 
 When creating an IAM policy, you refer to the **chat\-configuration** resource by its Amazon Resource Name \(ARN\)\. An AWS Chatbot resource ARN consists of three objects:
 + A list of one or more Amazon Simple Notification Service \(Amazon SNS\) topic ARNs for the topics to be associated with the configuration\.
+
+  
 + The ARN of the customer's IAM role\. 
 
    AWS Chatbot assumes the IAM role in the customer's account and makes API calls to other AWS services to get necessary information\. For example, for an Amazon CloudWatch alarm notification, AWS Chatbot requires the metric graphic image displayed with the CloudWatch alarm notification\. For that, AWS Chatbot calls a CloudWatch API with the customer's credentials\.
@@ -78,8 +80,8 @@ To add a resource\-level permission to a policy, include the channel's ARN in a 
                 "chatbot:Describe*",
                 "chatbot:UpdateSlackChannelConfiguration",
                 "chatbot:CreateSlackChannelConfiguration",
-                "chatbot:DeleteSlackChannelConfiguration"
-                "chatbot:CreateChimeWebhookConfiguration"
+                "chatbot:DeleteSlackChannelConfiguration",
+                "chatbot:CreateChimeWebhookConfiguration",
                 "chatbot:UpdateChimeWebhookConfiguration"
                 ],
             "Resource":"arn:aws:chatbot::123456789021:chat-configuration/slack-channel/devops_private_channel"

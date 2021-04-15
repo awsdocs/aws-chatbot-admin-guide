@@ -2,15 +2,16 @@
 
 To get started using AWS Chatbot to help manage your AWS infrastructure, follow the steps below to set up AWS Chatbot with chat rooms and Amazon SNS topic subscriptions\.
 
-If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this topic](#AWS::Chatbot::Role)\.
+If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this topic](#editing-iam-roles-for-chatbot)\.
 
 **Topics**
 + [Prerequisites](#getting-started-prerequisites)
 + [Step 1: Set up chat clients for AWS Chatbot](#chat-client-setup)
 + [Step 2: Subscribe an Amazon SNS topic to AWS Chatbot](#subscribe-sns-topic)
-+ [Step 3: Test notifications from AWS services to Amazon Chime or Slack chat rooms](#test-notifications)
++ [Step 3: Test notifications from AWS services to Amazon Chime or Slack](#test-notifications)
++ [Test notifications from AWS services to Amazon Chime or Slack using CloudWatch](test-notifications-cw.md)
 + [Step 4: Remove chat rooms](#removing-chatrooms)
-+ [Configuring an IAM role for AWS Chatbot](#AWS::Chatbot::Role)
++ [Configuring an IAM role for AWS Chatbot](#editing-iam-roles-for-chatbot)
 + [Next steps](#next-steps)
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
@@ -26,7 +27,7 @@ When you configure your clients, don't enable the **Enable raw message delivery*
 
 AWS Chatbot requires an AWS Identity and Access Management \(IAM\) role with Amazon CloudWatch read permissions and a trust policy that allows AWS Chatbot to use those permissions on your behalf\. When you configure AWS Chatbot, you can create a role with a predefined set of policies to display CloudWatch charts in AWS Chatbot notifications\. 
 
-You can also use an existing IAM role that you can configure for use with AWS Chatbot\. For more information, see [Configuring an IAM role for AWS Chatbot](#AWS::Chatbot::Role)\. For simplicity, particularly in testing your setup, we recommend using the IAM role with predefined policies that you can configure in AWS Chatbot\. 
+You can also use an existing IAM role that you can configure for use with AWS Chatbot\. For more information, see [Configuring an IAM role for AWS Chatbot](#editing-iam-roles-for-chatbot)\. For simplicity, particularly in testing your setup, we recommend using the IAM role with predefined policies that you can configure in AWS Chatbot\. 
 
 ### Setting up AWS Chatbot with Slack<a name="slack-setup"></a>
 
@@ -60,7 +61,7 @@ You can use private Slack channels with AWS Chatbot\. To do so, choose **Private
 
 1. Define the **IAM permissions** that the chatbot uses for messaging your Slack chat room:
 
-   1. For **IAM role**, choose **Create an IAM role using a template**\. If you want to use an existing role instead, choose **Use an existing role**\. To use an existing IAM role, you will need to modify it for use with AWS Chatbot\. For more information, see [Configuring an IAM Role for AWS Chatbot](#AWS::Chatbot::Role)\.
+   1. For **IAM role**, choose **Create an IAM role using a template**\. If you want to use an existing role instead, choose **Use an existing role**\. To use an existing IAM role, you will need to modify it for use with AWS Chatbot\. For more information, see [Configuring an IAM Role for AWS Chatbot](#editing-iam-roles-for-chatbot)\.
 
    1. For **Role name**, enter a name\. Valid characters: a\-z, A\-Z, 0\-9, \.\\w\+=,\.@\-\_\.
 
@@ -76,9 +77,19 @@ You can use private Slack channels with AWS Chatbot\. To do so, choose **Private
 
 1. Choose **Configure**\. 
 
+1. Add AWS Chatbot to the Slack workspace:
+
+   1. In Slack, on the left navigation pane, choose **Apps**\.
+**Note**  
+If you do not see **Apps** in the left navigation pane, choose **More**, then choose **Apps**\.
+
+   1. If AWS Chatbot is not listed, choose the **Browse Apps Directory** button\.
+
+   1. Browse the directory for the AWS Chatbot app and then choose **Add** to add AWS Chatbot to your workspace\.
+
 Notifications from supported services that publish to the chosen Amazon SNS topics will now appear in the Slack channel\.
 
-You can configure as many channels, with as many topics, as you need\.
+You can configure as many channels with as many topics as you need\.
 
 **Note**  
 If you configure a private Slack channel, run the `/invite @AWS` command in Slack to invite the AWS Chatbot to the chat room\.
@@ -130,7 +141,7 @@ There is an extra charge for using CloudWatch Logs\.
 
 1. For **IAM permissions**, set the IAM permissions for AWS Chatbot\.
 
-   1. For **Role**, choose **Create a new role from template**\. If you want to use an existing role instead, choose it from the **IAM Role** list\. To use an existing IAM role, you might need to modify it for use with AWS Chatbot\. For more information, see [Configuring an IAM Role for AWS Chatbot](#AWS::Chatbot::Role)\.
+   1. For **Role**, choose **Create a new role from template**\. If you want to use an existing role instead, choose it from the **IAM Role** list\. To use an existing IAM role, you might need to modify it for use with AWS Chatbot\. For more information, see [Configuring an IAM Role for AWS Chatbot](#editing-iam-roles-for-chatbot)\.
 
    1. For **Policy templates**, choose **Notification permissions**\. This is the IAM policy provided by AWS Chatbot\. It provides the necessary Read and List permissions for CloudWatch alarms, events and logs, and for Amazon SNS topics\.
 
@@ -178,72 +189,23 @@ You can set up each supported AWS service to *target* one or more SNS topics to 
 
 1. To check for the subscription, click on any subscription entry in the AWS Chatbot console\. The Amazon SNS console opens, showing the list of subscriptions for the selected topic\.
 
-## Step 3: Test notifications from AWS services to Amazon Chime or Slack chat rooms<a name="test-notifications"></a>
+## Step 3: Test notifications from AWS services to Amazon Chime or Slack<a name="test-notifications"></a>
 
-To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends notifications to your Amazon Chime or Slack chat room, you can test your setup by sending a notification\. Any SNS topic can send notifications to your chat rooms, but the topic must be assigned to a service supported by AWS Chatbot\. For a complete list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
+To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends notifications to your Amazon Chime or Slack chat room, you can test your setup by sending a notification\. To test your notifications, ensure your topics are assigned to a service supported by AWS Chatbot\. For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\. You can also test notifications by using CloudWatch\. For more information, see [Test notifications from AWS services to Amazon Chime or Slack using CloudWatch](test-notifications-cw.md)\.
 
-**Note**  
-CloudWatch alarms and events are separately configured and have different characteristics for use with AWS Chatbot\. 
+**Testing notifications with configured clients**
 
-The following procedure uses a CloudWatch alarm because most AWS services supported by AWS Chatbot send their event and alarm data to CloudWatch\. 
+1. Open the [AWS Chatbot console](https://console.aws.amazon.com/chatbot/)\.
 
-You configure CloudWatch alarms using performance metrics from the services that are active in your account\. When you associate CloudWatch alarms with an Amazon SNS topic that is mapped to AWS Chatbot, the Amazon SNS topic sends the CloudWatch alarm notifications to the chat rooms\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md) and the [Troubleshooting](chatbot-troubleshooting.md) topic\.
+1. Choose the configured client you want to test\.
 
-**To test notifications to configured chat clients**
+1. In the configured client, choose the channel or webhook to send a test notification to\.
 
-1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+1. Choose **Send test message**\.
 
-1. In the navigation pane, choose **Alarms**, **Create alarm**\.
+1. View the confirmation message at the top of the screen that shows a message was sent to your Amazon SNS topic\.
 
-1. Select the correct AWS **Region** at the top right of the AWS console, that contains the Amazon SNS topic you need\. \(**Tip:** to make sure you have the right region for your SNS topics for testing alarms, you can check the AWS Chatbot configuration to see the regions for all configured SNS topics in each channel or webhook\.\)
-
-1. Choose **Select metric**, and choose the **SNS** service namespace\. \(All CloudWatch alarms use service *metrics* to generate their notifications, and you need to select one for this example\.\)
-
-   1. Choose **Topic metrics**\.
-
-   1. Choose the check box for the SNS topic next to its **Topic Name** and **Metric Name**\. Any SNS topics that you configured with AWS Chatbot appear in this list\.
-
-      *Important*: if you do not see your desired Amazon SNS topic in the SNS Topic list, make sure to select the correct AWS Region in the AWS console when you begin configuring the new CloudWatch alarm\.
-
-   1. Choose **Select metric**\.
-
-   The **Specify metric and conditions** page shows a graph and other information about the metric and statistic\.
-
-1.  For **Conditions** \(the circumstances under which the CloudWatch alarm fires and an action takes place\), choose the following options:
-
-   1. For **Threshold type**, choose **Static**\.
-
-   1. For **Whenever *metric* is**, choose **Lower/Equal <=threshold**\. 
-
-   1. For **than\.\.\.**, specify a threshold value of **1**\. This setting ensures you will trigger the test notification within one minute\.
-
-   1. Under **Additional configuration**, do the following: 
-
-      1. For **Datapoints to alarm**, select **1 out of 1**\.
-
-      1. For **Missing data treatment**, select **Treat missing data as bad**\.
-
-   1. Choose **Next**\.
-
-1. Choose **Configure actions**\. Here, you set the *action* to create SNS notifications when the metric threshold is exceeded\.
-
-    For **Notification**, choose the following options\.
-
-   1. For **Whenever this alarm state is\.\.\.**, choose **In Alarm**\.
-
-   1. For **Select an SNS topic**, choose **Select an existing SNS topic**\. 
-
-   1. For **Send a notification to\.\.\.**, choose your SNS topic that has a subscription to AWS Chatbot\. If the SNS topic is subscribed in AWS Chatbot, the endpoint value for AWS Chatbot appears in the **Email \(endpoints\)** field\. 
-**Note**  
-If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make sure that the SNS topic is set up correctly in the Slack channel or Amazon Chime webhook\. For more information, see [Setting Up AWS Chatbot with Slack](#slack-setup) or [Setting Up AWS Chatbot with Amazon Chime](#chime-setup)\. 
-
-   1. Choose **Next**\.
-
-1. Enter a name and description for the alarm\. The name must contain only ASCII characters\. Then, choose **Next**\.
-
-1.  For **Preview and create**, confirm that the information and conditions are correct, then choose **Create alarm**\.
-
-When the alarm triggers for the first time, you should receive the first test notification in your chat room, confirming that AWS Chatbot is working correctly and receiving alarm notifications from Amazon CloudWatch\.
+1. Confirm the test message in your Amazon Chime chat room or Slack channel\.
 
 ## Step 4: Remove chat rooms<a name="removing-chatrooms"></a>
 
@@ -279,7 +241,7 @@ You can remove an Amazon Chime webhook from the AWS Chatbot configuration\. Doin
 
 1. Choose **Delete**\.
 
-## Configuring an IAM role for AWS Chatbot<a name="AWS::Chatbot::Role"></a>
+## Configuring an IAM role for AWS Chatbot<a name="editing-iam-roles-for-chatbot"></a>
 
 You can create new IAM roles in the AWS Chatbot console, which provides a convenient way to deploy the AWS Chatbot service\. You associate these roles with your Slack channels or Amazon Chime webhooks\. The AWS Chatbot console does not allow editing of IAM roles, including any roles that you've already created in the AWS Chatbot console\. 
 
