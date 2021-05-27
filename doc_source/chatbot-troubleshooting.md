@@ -16,22 +16,6 @@ If you configured your AWS service to send notifications to the Amazon Simple No
 + **The notification's originating service is not supported by AWS Chatbot\.**
 
   For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
-+ **AWS Chatbot supports CloudWatch Events only for specific AWS services\.**
-
-  Services that support CloudWatch Events forwarding by Amazon SNS topics to Slack or Amazon Chime chat rooms include the following:
-  + [AWS Billing and Cost Management](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/sns-alert-chime.html)
-  + [AWS Config Events](https://docs.aws.amazon.com/config/latest/developerguide/monitor-config-with-cloudwatchevents.html)
-  + [Amazon GuardDuty Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html)
-  + [AWS Health Events](https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html)
-  + [ AWS Security Hub Events](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cloudwatch-events.html#securityhub-cwe-send)
-  + [AWS Systems Manager Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-cloudwatch-events.html) including the following:
-    + AWS Systems Manager [Configuration Compliance Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-fixing.html)
-    + AWS Systems Manager [Maintenance Windows Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-mw-register.html)
-    + AWS Systems Manager [Parameter Store Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html)
-
-  If you map Amazon SNS topics that are associated with any other AWS service, their CloudWatch Events notifications are sent to email or other standard SNS targets\. They won't work with AWS Chatbot\.
-**Note**  
-Some AWS services support Amazon CloudWatch alarms for reporting and monitoring\. You configure CloudWatch alarms using performance metrics from the services that are active in your account\. Amazon Elastic Compute Cloud \(EC2\), with its collection of metrics, is a good example\. When you associate CloudWatch alarms with an Amazon SNS topic that is mapped to AWS Chatbot, the Amazon SNS topic sends the CloudWatch alarm notifications to the chat rooms\.
 + **The SNS topic doesn't have a subscription to AWS Chatbot\.**
 
   In the Amazon SNS console, go to the **Topics** page, choose the **Subscriptions** tab, and then verify that the topic has a subscription\. If the topic doesn't, open the AWS Chatbot console, open your authorized client, and then look at the **Configured channels** or **Configured webhooks** list\. Add a new channel or webhook configuration, and then add the SNS topic\. Without this configuration, event notifications can't reach the chat rooms\. 
@@ -44,6 +28,14 @@ Some AWS services support Amazon CloudWatch alarms for reporting and monitoring\
 + **The event was throttled\.**
 
   AWS Chatbot allows for 10 events per second\. If more than 10 events per second are received, any event above 10 is throttled\.
+
+## How can I unsubscribe from AWS Chatbot notifications in a channel or chat room?<a name="unsubscribe-from-chatbot-notifications"></a>
+
+To unsubscribe a channel or chat room from all AWS Chatbot notifications, remove the respective configuration from the AWS Chatbot console\. Otherwise, to identify certain service and notification\-types to unsubscribe from, see [I don't want to receive notifications from certain services anymore\.](#i-dont-want-to-receive-notifications-from-certain-services)
+
+## I don't want to receive notifications from certain services anymore\.<a name="i-dont-want-to-receive-notifications-from-certain-services"></a>
+
+If you want to unsubscribe only some notifications from the channel or chatroom, you can remove specific SNS topics from the AWS Chatbot configuration\. Alternatively, you can remove the specific SNS topics as the event and alarm notification targets from the respective service configurations\. You should also check if you have Amazon EventBridge rules configured for the service event types and remove the specific SNS topics as the rule triggers targets\.
 
 ## CloudWatch alarm notifications don't show the graphs from the reporting metrics\.<a name="chatbot-notification-troubleshooting-cloudwatch-alarm-notifications-missing-metrics"></a>
 

@@ -6,10 +6,12 @@ When you create a new Amazon SNS topic, your services will require additional co
 
 **Topics**
 + [AWS Billing and Cost Management](#aws-billing)
++ [Tutorial: Creating an Amazon EventBridge rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)
 + [AWS CloudFormation](#cloud-formation)
 + [Notifications for AWS developer tools](#codeserviceevents)
 + [Amazon CloudWatch alarms](#cloudwatch)
-+ [Amazon CloudWatch Events](#cloudwatchevents)
++ [Incident Manager](#incidentManager)
++ [Amazon EventBridge](#eventbridge)
 + [[AWS Config](https://console.aws.amazon.com/config/)](#aws-config)
 + [[Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)](#aws-guardduty)
 + [[AWS Health](https://phd.aws.amazon.com/phd/home#/)](#aws-health)
@@ -51,13 +53,19 @@ Because CloudWatch alarms use SNS topics to forward alarm notifications, you nee
 
 AWS Chatbot also supports several AWS services through CloudWatch Events\. For more information, see the following section\.
 
-## Amazon CloudWatch Events<a name="cloudwatchevents"></a>
+## Incident Manager<a name="incidentManager"></a>
 
-AWS Chatbot supports several AWS services through [Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\. CloudWatch uses CloudWatch Events rules to help manage AWS service events and how you respond to them\. You can use these rules to associate an Amazon SNS topic \(or other actions\) with an event type from any AWS service\.
+ Incident Manager \[replace\] is an incident management console designed to help users mitigate and recover from incidents affecting their AWS\-hosted applications\. An incident is any unplanned interruption or reduction in quality of services\.
 
-You map the Amazon SNS topic to the CloudWatch Events rule, and then map it to an Slack channel or Amazon Chime webhook in the AWS Chatbot console\. When a service event matches the rule, the rule's Amazon SNS topic sends a notification to the chat room\. 
+AWS Chatbot allows you to communicate through chat chat channels during an incident\. During an incident, you receive notifications and incident updates in your chat channel\. You can also interact with the incident directly using chat commands\. For more information, see [Chat channels](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/notifications-chatbot.html) in the *Incident Manager User Guide*\.
 
-AWS Chatbot supports CloudWatch Events for the following AWS services: AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\.
+## Amazon EventBridge<a name="eventbridge"></a>
+
+ AWS Chatbot supports multiple AWS services through [Amazon EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-eventbridge-rule.html)\. Amazon EventBridge uses rules to help manage AWS service events and how you respond to them\. You can use these rules to associate an Amazon SNS topic \(or other actions\) with an event type from any AWS service\.
+
+You map the Amazon SNS topic to the Amazon EventBridge rule, and then map it to a Slack channel or Amazon Chime webhook in the AWS Chatbot console\. When a service event matches the rule, the rule's target Amazon SNS topic sends an event to the AWS Chatbot for processing\. The AWS Chatbot then sends a notification to the chat room\. For more information about creating Amazon EventBridge rules for AWS Chatbot see, [Creating an Amazon EventBridge Rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)\.
+
+Previously, AWS Chatbot event support only included:AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\. Currently, AWS Chatbot can process all service events handled by Amazon EventBridge\. For an exhaustive list of supported service events, see [EventBridge Event Examples from Supported AWS Services](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html) in the *Amazon EventBridge User Guide*\.
 
 ## [AWS Config](https://console.aws.amazon.com/config/)<a name="aws-config"></a>
 

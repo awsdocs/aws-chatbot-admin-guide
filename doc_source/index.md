@@ -19,6 +19,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Getting started with AWS Chatbot](getting-started.md)
    + [Test notifications from AWS services to Amazon Chime or Slack using CloudWatch](test-notifications-cw.md)
 + [Using AWS Chatbot with other AWS services](related-services.md)
+   + [Tutorial: Creating an Amazon EventBridge rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)
 + [Using AWS Chatbot with Slack](chatbot-slack-lambda-integration.md)
    + [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md)
    + [Using AWS Lambda with AWS Chatbot - Common use cases](chatbot-lambda-common-use-cases.md)
