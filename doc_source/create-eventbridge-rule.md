@@ -11,7 +11,7 @@ For this tutorial, you need a Slack or Amazon Chime client for AWS Chatbot\. For
 
 You also need to set up Amazon Simple Notification Service\. If you don't have any Amazon SNS topics yet, follow the steps in [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
- For more information about Amazon EventBridge, see [What Is Amazon Amazon EventBridge?](https://docs.aws.amazon.com/userguide/what-is-amazon-eventbridge.html) in the *Amazon Amazon EventBridge User Guide*\. 
+ For more information about Amazon EventBridge, see [What Is Amazon Amazon EventBridge?](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html) in the *Amazon Amazon EventBridge User Guide*\. 
 
 ## Create an Amazon EventBridge Rule<a name="creating-ebrule"></a>
 
