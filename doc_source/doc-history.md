@@ -4,6 +4,8 @@ The following table describes important changes to the *AWS Chatbot Admin Guide*
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Additional CLI command support added](#doc-history) | Content updates to reflect expansion of available CLI commands\. | November 29, 2021 | 
+| [AWS Chatbot EventBridge release](#doc-history) | Content updates to reflect addition of Amazon EventBridge\. | April 23, 2021 | 
 | [AWS Chatbot general availability release](#doc-history) | Content updates to reflect improvements made to AWS Chatbot during the preview period\. | April 22, 2020 | 
 | [Updated CLI commands information\.](#doc-history) | Updated CLI commands information to add IAM policy information for support tickets, minor updates/edits elsewhere\. | December 13, 2019 | 
 | [Add support for CLI commands in Slack channels\.](#doc-history) | Addition of documentation for configuring support of commands for AWS services in Slack channels\. | November 22, 2019 | 

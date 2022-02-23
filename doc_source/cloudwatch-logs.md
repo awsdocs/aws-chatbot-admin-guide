@@ -4,7 +4,9 @@ AWS provides event logging with Amazon CloudWatch Logs\. With CloudWatch Logs fo
 
 Possible errors that you can see with CloudWatch Logs include lack of permissions, unsupported events, and events throttled by the chat client\. For more information about these errors, see [Troubleshooting AWS Chatbot](chatbot-troubleshooting.md)\.
 
-You can choose to enable logging for all events, or only for errors\.
+AWS Chatbot also provides an audit log of commands executed by AWS Chatbot in CloudWatch Logs\. With CloudWatch Logs' audit log events for AWS Chatbot, you can see an audit log of executed commands and their chat workspace ID, channel ID, and channel user ID attributes\. The audit log events in CloudWatch Logs are always enabled and can't be disabled\.
+
+AWS Chatbot always logs audit events for command execution to CloudWatch Logs\. You can choose to enable logging for all events, or only for errors\.
 
 **Note**  
 There is an additional charge for using CloudWatch Logs\. For more details, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing)\.

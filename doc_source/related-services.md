@@ -6,17 +6,18 @@ When you create a new Amazon SNS topic, your services will require additional co
 
 **Topics**
 + [AWS Billing and Cost Management](#aws-billing)
-+ [Tutorial: Creating an Amazon EventBridge rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)
 + [AWS CloudFormation](#cloud-formation)
 + [Notifications for AWS developer tools](#codeserviceevents)
 + [Amazon CloudWatch alarms](#cloudwatch)
-+ [Incident Manager](#incidentManager)
 + [Amazon EventBridge](#eventbridge)
++ [Tutorial: Creating an Amazon EventBridge rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)
 + [[AWS Config](https://console.aws.amazon.com/config/)](#aws-config)
 + [[Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)](#aws-guardduty)
 + [[AWS Health](https://phd.aws.amazon.com/phd/home#/)](#aws-health)
 + [[AWS Security Hub](https://console.aws.amazon.com/securityhub/)](#security-hub)
 + [[AWS Systems Manager](https://console.aws.amazon.com/systems-manager/)](#system-manager)
++ [AWS Systems Manager Runbooks](#runbooks)
++ [AWS Systems Manager Incident Manager](#incidentManager)
 
 You can set up the following AWS services to forward notifications to Amazon Chime or Slack chat rooms\.
 
@@ -53,19 +54,19 @@ Because CloudWatch alarms use SNS topics to forward alarm notifications, you nee
 
 AWS Chatbot also supports several AWS services through CloudWatch Events\. For more information, see the following section\.
 
-## Incident Manager<a name="incidentManager"></a>
-
- Incident Manager \[replace\] is an incident management console designed to help users mitigate and recover from incidents affecting their AWS\-hosted applications\. An incident is any unplanned interruption or reduction in quality of services\.
-
-AWS Chatbot allows you to communicate through chat chat channels during an incident\. During an incident, you receive notifications and incident updates in your chat channel\. You can also interact with the incident directly using chat commands\. For more information, see [Chat channels](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/notifications-chatbot.html) in the *Incident Manager User Guide*\.
-
 ## Amazon EventBridge<a name="eventbridge"></a>
 
  AWS Chatbot supports multiple AWS services through [Amazon EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-eventbridge-rule.html)\. Amazon EventBridge uses rules to help manage AWS service events and how you respond to them\. You can use these rules to associate an Amazon SNS topic \(or other actions\) with an event type from any AWS service\.
 
 You map the Amazon SNS topic to the Amazon EventBridge rule, and then map it to a Slack channel or Amazon Chime webhook in the AWS Chatbot console\. When a service event matches the rule, the rule's target Amazon SNS topic sends an event to the AWS Chatbot for processing\. The AWS Chatbot then sends a notification to the chat room\. For more information about creating Amazon EventBridge rules for AWS Chatbot see, [Creating an Amazon EventBridge Rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)\.
 
-Previously, AWS Chatbot event support only included:AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\. Currently, AWS Chatbot can process all service events handled by Amazon EventBridge\. For an exhaustive list of supported service events, see [EventBridge Event Examples from Supported AWS Services](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html) in the *Amazon EventBridge User Guide*\.
+**Note**  
+AWS Chatbot only delivers notifications with their original EventBridge event message content to chat channels\. If this message content is modified \(such as by using EventBridge [InputTransformers](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html)\), AWS Chatbot won't be able to deliver notifications to your chat channels\.
+
+Previously, AWS Chatbot event support only included: AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\. Currently, AWS Chatbot can process most service events handled by Amazon EventBridge\. For an exhaustive list of supported service events, see [EventBridge Event Examples from Supported AWS Services](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html) in the *Amazon EventBridge User Guide*\.
+
+**Note**  
+Event notifications from: CloudWatch Alarms, CodeBuild, CodeCommit, CodeDeploy, and CodePipeline are not currently supported via EventBridge rules\. If you want to receive notifications for one of these services, you can go to its console, and configure Amazon SNS notifications that you can then map to your Slack channel or Amazon Chime webhook configuration in AWS Chatbot\. For more information, see [Amazon CloudWatch alarms ](#cloudwatch)or [Notifications for AWS developer tools](#codeserviceevents)\. 
 
 ## [AWS Config](https://console.aws.amazon.com/config/)<a name="aws-config"></a>
 
@@ -127,3 +128,15 @@ AWS Chatbot supports the following Systems Manager events\.
 + A parameter is deleted\.
 
 For information about monitoring Systems Manager events with CloudWatch, see [Monitoring Systems Manager Events with Amazon CloudWatch Events](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-cloudwatch-events.html) in the *AWS Systems Manager User Guide*\. 
+
+## AWS Systems Manager Runbooks<a name="runbooks"></a>
+
+SM runbooks define the actions that Systems Manager performs on your managed instances and other AWS resources when an automation runs\. A runbook contains one or more steps that run in sequential order\. The process of running these actions and their steps is called the automation\. AWS Chatbot supports the ability to run SM runbooks directly from Slack using CLI commands\. You can type a command to list your runbooks and choose a runbook to run\. Runbooks can require one or more input parameters before running \(for example, Amazon EC2 instances can require inputs such as instance id\)\. Once the runbook begins, it runs in its entirety\. For an example of running a runbook using a CLI command, see [Run an Automation runbook](common-use-cases.md#run-book)\.
+
+For more information about SM runbooks, see[ Working with runbooks](https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-documents.html) in the *AWS Systems Manager User Guide*\.
+
+## AWS Systems Manager Incident Manager<a name="incidentManager"></a>
+
+AWS Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their AWS\-hosted applications\. An incident is any unplanned interruption or reduction in quality of services\.
+
+AWS Chatbot allows you to communicate through chat channels and receive notifications and incident updates during an incident\. You can also interact with the incident directly using chat commands\. For more information, see [Chat channels](https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html) in the *Incident Manager User Guide*\.

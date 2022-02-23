@@ -21,13 +21,33 @@ If you configured your AWS service to send notifications to the Amazon Simple No
   In the Amazon SNS console, go to the **Topics** page, choose the **Subscriptions** tab, and then verify that the topic has a subscription\. If the topic doesn't, open the AWS Chatbot console, open your authorized client, and then look at the **Configured channels** or **Configured webhooks** list\. Add a new channel or webhook configuration, and then add the SNS topic\. Without this configuration, event notifications can't reach the chat rooms\. 
 + **The Amazon SNS topic has server\-side encryption turned on\.**
 
-  If you have server\-side encryption turned on for your Amazon SNS topics, they will not appear in your chat rooms\. You can resolve this by turning off server\-side encryption for your Amazon SNS topics\. For information on how to disable server\-side encryption for your Amazon SNS topics, see [Enabling server\-side encryption \(SSE\) for an Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/dg/sns-enable-encryption-for-topic.html) in the *Amazon Simple Notification Service Developer Guide*\.
+  If you have server\-side encryption enabled for your Amazon SNS topics, you must include the following section in your AWS KMS key policy\. This gives sending services such as Amazon EventBridge permissions to post events to the encrypted Amazon SNS topics\.
+
+  ```
+  {
+    "Sid": "Allow CWE to use the key",
+    "Effect": "Allow",
+    "Principal": {
+      "Service": "events.amazonaws.com"
+    },
+    "Action": [
+      "kms:Decrypt",
+      "kms:GenerateDataKey"
+    ],
+    "Resource": "*"
+  }
+  ```
+
+  In order to successfully test the configuration from the console, your role must also have permission to use the AWS KMS key\.
 + **Your SNS topic subscription to the AWS Chatbot has the Enable raw message delivery setting enabled\.**
 
   Don't enable the **Enable raw message delivery** feature for any SNS topic subscriptions to AWS Chatbot\.
 + **The event was throttled\.**
 
   AWS Chatbot allows for 10 events per second\. If more than 10 events per second are received, any event above 10 is throttled\.
++ **The EventBridge event message content was modified\.**
+
+  AWS Chatbot only delivers notifications with their original EventBridge event message content to chat channels\. If this message content is modified \(such as by using EventBridge [InputTransformers](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html)\), AWS Chatbot won't be able to deliver notifications to your chat channels\.
 
 ## How can I unsubscribe from AWS Chatbot notifications in a channel or chat room?<a name="unsubscribe-from-chatbot-notifications"></a>
 

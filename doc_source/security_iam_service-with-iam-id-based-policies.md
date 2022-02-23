@@ -71,7 +71,7 @@ The following example of an AWS Chatbot identity\-based policy controls all aspe
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "AllChatbotPermissions"
+            "Sid": "AllChatbotPermissions",
             "Action": [
                 "cloudwatch:Describe*",
                 "cloudwatch:Get*",

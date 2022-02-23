@@ -1,7 +1,7 @@
 # AWS Chatbot Administrator Guide
 
 -----
-*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -22,7 +22,8 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Creating an Amazon EventBridge rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)
 + [Using AWS Chatbot with Slack](chatbot-slack-lambda-integration.md)
    + [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md)
-   + [Using AWS Lambda with AWS Chatbot - Common use cases](chatbot-lambda-common-use-cases.md)
+      + [Managing user roles](manage-user-roles.md)
+   + [Using CLI commands with AWS Chatbot - Common use cases](common-use-cases.md)
    + [Tutorial: Using AWS Chatbot to run an AWS Lambda function remotely](chatbot-run-lambda-function-remotely-tutorial.md)
 + [Monitoring AWS Chatbot](monitoring-chatbot.md)
    + [Monitoring AWS Chatbot with Amazon CloudWatch](monitoring-cloudwatch.md)

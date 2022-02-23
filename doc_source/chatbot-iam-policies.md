@@ -12,8 +12,8 @@ When you create a new role in the AWS Chatbot console, any of the IAM policies d
 
 AWS Chatbot supports the following AWS managed IAM policies:
 + [**ReadOnlyAccess**](#read-only-access-managed-policy) 
-+ [**CloudWatchReadOnlyAccess** ](#CloudwatchReadOnlyAccess-policy-for-chatbot)
-+ [**AWS Support Command Permissions Policy** ](#chatbot_support_policy)
++ [**CloudWatchReadOnlyAccess**](#CloudwatchReadOnlyAccess-policy-for-chatbot)
++ [**AWS Support Command Permissions Policy**](#chatbot_support_policy)
 
 AWS managed policies are available to all AWS Chatbot users, but you can't change or edit them\. You can copy them and use them as templates for your own policies, knowing that you are using AWS\-approved policy language to build your own policies\.
 

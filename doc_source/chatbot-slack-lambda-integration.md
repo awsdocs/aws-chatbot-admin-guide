@@ -4,5 +4,5 @@ AWS Chatbot enables you to use different AWS services through Slack\. For exampl
 
 **Topics**
 + [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md)
-+ [Using AWS Lambda with AWS Chatbot \- Common use cases](chatbot-lambda-common-use-cases.md)
++ [Using CLI commands with AWS Chatbot \- Common use cases](common-use-cases.md)
 + [Tutorial: Using AWS Chatbot to run an AWS Lambda function remotely](chatbot-run-lambda-function-remotely-tutorial.md)
