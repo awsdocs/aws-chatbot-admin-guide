@@ -1,5 +1,10 @@
 # Getting started with AWS Chatbot<a name="getting-started"></a>
 
+
+|  | 
+| --- |
+| AWS resource management using CLI commands in Slack is in public preview and is subject to change\. Your use of this feature is subject to the Betas and Previews terms of the [AWS Service Terms](https://aws.amazon.com/service-terms/) \(Section 2\)\. | 
+
 To get started using AWS Chatbot to help manage your AWS infrastructure, follow the steps below to set up AWS Chatbot with chat rooms and Amazon SNS topic subscriptions\.
 
 If you need to customize an IAM role to work with AWS Chatbot, [you can use the procedure in this topic](#editing-iam-roles-for-chatbot)\.
@@ -10,13 +15,13 @@ If you need to customize an IAM role to work with AWS Chatbot, [you can use the 
 + [Step 2: Subscribe an Amazon SNS topic to AWS Chatbot](#subscribe-sns-topic)
 + [Step 3: Test notifications from AWS services to Amazon Chime or Slack](#test-notifications)
 + [Test notifications from AWS services to Amazon Chime or Slack using CloudWatch](test-notifications-cw.md)
-+ [Step 4: Remove chat rooms](#removing-chatrooms)
++ [Remove chat rooms](#removing-chatrooms)
 + [Configuring an IAM role for AWS Chatbot](#editing-iam-roles-for-chatbot)
 + [Next steps](#next-steps)
 
 ## Prerequisites<a name="getting-started-prerequisites"></a>
 
-Before you get started, make sure you've completed the tasks in [Setting up AWS Chatbot](setting-up.md)\.
+Before you get started, make sure you've completed the tasks in [Setting up AWS Chatbot](setting-up.md)\. You will need to choose a permissions scheme in the following procedure\. This scheme determines the permissions your channel members will have\.
 
 ## Step 1: Set up chat clients for AWS Chatbot<a name="chat-client-setup"></a>
 
@@ -59,15 +64,33 @@ There is an extra charge for using CloudWatch Logs\.
 **Note**  
 You can use private Slack channels with AWS Chatbot\. To do so, choose **Private channel**\. In Slack, copy the Channel ID of the private channel by right\-clicking on the channel name in the left pane and choosing **Copy Link**\. The Channel ID is the string at the end of the URL \(for example, `AB3BBLZZ8YY`\)\. In AWS Chatbot, paste the ID into the **Channel URL** field\. \(If you copy the URL of the private Slack channel, the AWS Chatbot console shows only the Channel ID value when you paste it into the field\.\) 
 
-1. Define the **IAM permissions** that the chatbot uses for messaging your Slack chat room:
+1. Choose your **Role Setting**\. You can choose a channel IAM role or user roles\. A channel IAM role allows channel members to share the same permissions\. User roles require your channel members to choose their own roles\. If you choose to use a channel IAM role, your users can still choose to use their own user roles\. For more information about role setting, see [Role setting](security-iam.md#role-setting)\.
 
-   1. For **IAM role**, choose **Create an IAM role using a template**\. If you want to use an existing role instead, choose **Use an existing role**\. To use an existing IAM role, you will need to modify it for use with AWS Chatbot\. For more information, see [Configuring an IAM Role for AWS Chatbot](#editing-iam-roles-for-chatbot)\.
+------
+#### [ Channel IAM role ]
+
+   1. For **Role setting**, choose **Channel IAM role**\.
+
+   1. For **Channel IAM role**, choose **Create new role**\. If you want to use an existing role instead, choose **Use an existing role**\. To use an existing IAM role, you will need to modify it for use with AWS Chatbot\. For more information, see [Configuring an IAM Role for AWS Chatbot](#editing-iam-roles-for-chatbot)\.
 
    1. For **Role name**, enter a name\. Valid characters: a\-z, A\-Z, 0\-9, \.\\w\+=,\.@\-\_\.
 
-   1. For **Policy templates**, choose **Notification permissions**\. This is the IAM policy template for AWS Chatbot\. It provides the necessary Read and List permissions for CloudWatch alarms, events and logs, and for Amazon SNS topics\.
+   1. For **Role policy template**, choose the template you wish to use\.
 
-1. Choose the SNS topics that will send notifications to the Slack channel\.
+------
+#### [ User roles ]
+
+   1. For **Role setting**, choose **User roles**\.
+
+------
+
+1. Select the policies that will make up your [channel guardrails](security-iam.md#channel-guardrails)\. Your channel guardrails control what actions are available to your channel members\.
+**Note**  
+If you initially had permission to run Lambda invoke, it is contained in **All actions permitted**\.
+**Note**  
+To run most CLI commands from your Slack channel, ensure you select **All actions permitted**\.
+
+1. Choose your notification settings:
 
    1. For **SNS Region**, choose the AWS Region that hosts the SNS topics for this AWS Chatbot subscription\.
 
@@ -75,7 +98,15 @@ You can use private Slack channels with AWS Chatbot\. To do so, choose **Private
 
    1. To add an Amazon SNS topic from another AWS Region to the notification subscription, choose **Add another Region**\. 
 
-1. Choose **Configure**\. 
+1. Choose **Save**\. 
+
+1. Set **User permissions**:
+**Note**  
+You can choose to enable a user role requirement\. This requires channel members to apply a user role before running commands in Slack\. For more information, see [User role requirement](security-iam.md#role-req)\.
+
+   1. Under **Account settings**, choose **User permissions**\.
+
+   1. In **User role requirement**, choose if you want to enable a user role requirement\.
 
 1. Add AWS Chatbot to the Slack workspace:
 
@@ -171,6 +202,9 @@ You can quickly subscribe existing Amazon SNS topics to the AWS Chatbot service\
 **Note**  
 You can set up each supported AWS service to *target* one or more SNS topics to send notifications to AWS Chatbot\. You do this using each AWS service's console, or using AWS CloudFormation\. If you already have Amazon SNS topics set as targets for supported services, you can configure AWS Chatbot to use those topics\. Notifications from subscribed topics will automatically appear in your Slack or Amazon Chime clients without further configuration\. 
 
+**Note**  
+If your SNS topic is encrypted, you must add a section to your AWS KMS key policy to give the sending service permissions to post events to the encrypted SNS topics\. For more information, see [Setting up Amazon SNS topics](setting-up.md#chatbot-sns)\.
+
 1. Open the AWS Chatbot console at [https://console.aws.amazon.com/chatbot/](https://console.aws.amazon.com/chatbot/)\.
 
 1. Under **Configured clients**, choose Slack or Amazon Chime\. 
@@ -207,7 +241,7 @@ To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends 
 
 1. Confirm the test message in your Amazon Chime chat room or Slack channel\.
 
-## Step 4: Remove chat rooms<a name="removing-chatrooms"></a>
+## Remove chat rooms<a name="removing-chatrooms"></a>
 
 ### Removing an authorized Slack client from AWS Chatbot<a name="removing-slack-client"></a>
 
@@ -267,7 +301,6 @@ You can attach AWS managed policies and customer managed policies\. AWS Chatbot 
 
 1. Choose the policy you want by choosing its name\. You can use the **Search** box to search for the policy by its name or by a partial string of characters\. For example, all IAM policies associated with AWS Chatbot include the character string **Chatbot** as part of the policy name\. Following are the preconfigured customer managed policies available for AWS Chatbot:
    + **AWS\-Chatbot\-NotificationsOnly\-Policy**
-   + **AWS\-Chatbot\-LambdaInvoke\-Policy**
    + **AWS\-Chatbot\-ReadOnly\-Commands\-Policy**
 
    You can use these policies to create your own policies that are less permissive and specify the resources their users can access in their roles\. You can also substitute these custom policies for the ones listed here\.

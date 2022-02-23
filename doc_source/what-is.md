@@ -1,5 +1,10 @@
 # What is AWS Chatbot?<a name="what-is"></a>
 
+
+|  | 
+| --- |
+| AWS resource management using CLI commands in Slack is in public preview and is subject to change\. Your use of this feature is subject to the Betas and Previews terms of the [AWS Service Terms](https://aws.amazon.com/service-terms/) \(Section 2\)\. | 
+
 AWS Chatbot is an AWS service that enables DevOps and software development teams to use Amazon Chime and Slack chat rooms to monitor and respond to operational events in their AWS Cloud\. AWS Chatbot processes AWS service notifications from Amazon Simple Notification Service \(Amazon SNS\), and forwards them to Amazon Chime and Slack chat rooms so teams can analyze and act on them immediately, regardless of location\.
 
 You can also run AWS CLI commands in Slack channels, and file AWS Support cases from the Slack screen\.
@@ -21,7 +26,7 @@ Important features of the AWS Chatbot service include the following:
 + **Supports Slack and Amazon Chime** – You can add AWS Chatbot to your Slack channel or Amazon Chime chat rooms in just a few clicks\.
 + **Predefined AWS Identity and Access Management \(IAM\) policy templates** – AWS Chatbot provides chat room\-specific permission controls through AWS Identity and Access Management \(IAM\)\. AWS Chatbot’s predefined templates make it easy to select and set up the permissions you want associated with a given channel or chat room\.
 + **Receive notifications** – Use AWS Chatbot to receive notifications about operational incidents and other events from supported sources, such as operational alarms, security alerts, or budget deviations\. To set up notifications in the AWS Chatbot console, you simply choose the channels or chat rooms you want to receive notifications and then choose which Amazon Simple Notification Service \(Amazon SNS\) topics should trigger notifications\.
-+ **Retrieve diagnostics information through the AWS CLI with Slack** – AWS Chatbot supports read\-only commands for most AWS services, making it easy to retrieve diagnostic information about your AWS resources from Slack on desktop and mobile devices\. Your teams can analyze and respond to events faster by retrieving diagnostic information in real\-time, from a centralized location\. You can also initiate workflows by invoking Lambda functions or create AWS Support cases with a simple command from Slack\. AWS Chatbot commands use the standard AWS Command Line Interface syntax\.
++ **Monitor and manage AWS resources through the AWS CLI with Slack** – AWS Chatbot supports CLI commands for most AWS services, making it easy to monitor and manage your AWS resources from Slack on desktop and mobile devices\. Your teams can retrieve diagnostic information in real\-time, change your AWS resources, run AWS SM runbooks, and start long running jobs from a centralized location\. AWS Chatbot commands use the standard AWS Command Line Interface syntax\.
 
 ## How AWS Chatbot works<a name="chatbot-works"></a>
 

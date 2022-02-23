@@ -53,3 +53,22 @@ For more information on updating the permissions of existing users, see [Adding 
 ## Setting up Amazon SNS topics<a name="chatbot-sns"></a>
 
 To use AWS Chatbot, you must have Amazon SNS topics set up\. If you don't have any Amazon SNS topics yet, follow the steps to get started in [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html) in the *Amazon Simple Notification Service Developer Guide*\.
+
+If you have server\-side encryption enabled for your Amazon SNS topics, you must include the following section in your AWS KMS key policy\. This gives sending services such as Amazon EventBridge permissions to post events to the encrypted SNS topics\.
+
+```
+{
+  "Sid": "Allow CWE to use the key",
+  "Effect": "Allow",
+  "Principal": {
+    "Service": "events.amazonaws.com"
+  },
+  "Action": [
+    "kms:Decrypt",
+    "kms:GenerateDataKey"
+  ],
+  "Resource": "*"
+}
+```
+
+In order to successfully test the configuration from the console, your role must also have permission to use the AWS KMS key\.
