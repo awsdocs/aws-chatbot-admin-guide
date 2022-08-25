@@ -14,9 +14,7 @@ For this tutorial, you need a Slack or Amazon Chime client for AWS Chatbot\. For
 
 You also need to set up Amazon Simple Notification Service\. Your Amazon SNS topic is used in the creation of your EventBridge rule and should be identical to the Amazon SNS topic used in your AWS Chatbot configuration\. If you don't have any Amazon SNS topics yet, follow the steps in [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
-
- For more information about Amazon EventBridge, see [What Is Amazon Amazon EventBridge?](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html) in the *Amazon Amazon EventBridge User Guide*\. 
-
+ For more information about Amazon EventBridge, see [What Is Amazon Amazon EventBridge?](https://docs.aws.amazon.com/userguide/what-is-amazon-eventbridge.html) in the *Amazon EventBridge User Guide*\. 
 
 ## Create an Amazon EventBridge Rule<a name="creating-ebrule"></a>
 
@@ -71,5 +69,4 @@ You can receive EventBridge event notifications between AWS accounts and Regions
 You can remove any resources created for this tutorial by navigating to the Amazon EventBridge console and deleting the resource\.
 
 **To delete or disable an Amazon EventBridge rule**
-+ To delete or disable an Amazon EventBridge rule, see [Deleting or Disabling a Rule](https://docs.aws.amazon.com/eventbridge/latest/userguide/delete-or-disable-rule.html) in the *Amazon Amazon EventBridge User Guide*\.
-
++ To delete or disable an Amazon EventBridge rule, see [Deleting or Disabling a Rule](https://docs.aws.amazon.com/eventbridge/latest/userguide/delete-or-disable-rule.html) in the *Amazon EventBridge User Guide*\.
