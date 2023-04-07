@@ -1,13 +1,13 @@
-# Test notifications from AWS services to Amazon Chime or Slack using CloudWatch<a name="test-notifications-cw"></a>
+# Test notifications from AWS services to chat channels using CloudWatch<a name="test-notifications-cw"></a>
 
-To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends notifications to your Amazon Chime or Slack chat room, you can test your setup by sending a notification\. Any SNS topic can send notifications to your chat rooms, but the topic must be assigned to a service supported by AWS Chatbot\. For a complete list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
+To verify that an Amazon Simple Notification Service \(Amazon SNS\) topic sends notifications to your chat channels, you can test your setup by sending a notification\. Any SNS topic can send notifications to your chat rooms, but the topic must be assigned to a service supported by AWS Chatbot\. For a complete list of supported services, see [Monitoring AWS services using AWS Chatbot](related-services.md)\.
 
 **Note**  
 CloudWatch alarms and events are separately configured and have different characteristics for use with AWS Chatbot\. 
 
 The following procedure uses a CloudWatch alarm because most AWS services supported by AWS Chatbot send their event and alarm data to CloudWatch\. 
 
-You configure CloudWatch alarms using performance metrics from the services that are active in your account\. When you associate CloudWatch alarms with an Amazon SNS topic that is mapped to AWS Chatbot, the Amazon SNS topic sends the CloudWatch alarm notifications to the chat rooms\. For more information, see [Using AWS Chatbot with Other AWS Services](related-services.md) and the [Troubleshooting](chatbot-troubleshooting.md) topic\.
+You configure CloudWatch alarms using performance metrics from the services that are active in your account\. When you associate CloudWatch alarms with an Amazon SNS topic that is mapped to AWS Chatbot, the Amazon SNS topic sends the CloudWatch alarm notifications to the chat rooms\. For more information, see [Monitoring AWS services using AWS Chatbot](related-services.md) and the [Troubleshooting](chatbot-troubleshooting.md) topic\.
 
 **To test notifications to configured chat clients**
 
@@ -55,7 +55,7 @@ You configure CloudWatch alarms using performance metrics from the services that
 
    1. For **Send a notification to\.\.\.**, choose your SNS topic that has a subscription to AWS Chatbot\. If the SNS topic is subscribed in AWS Chatbot, the endpoint value for AWS Chatbot appears in the **Email \(endpoints\)** field\. 
 **Note**  
-If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make sure that the SNS topic is set up correctly in the Slack channel or Amazon Chime webhook\. For more information, see [Setting Up AWS Chatbot with Slack](getting-started.md#slack-setup) or [Setting Up AWS Chatbot with Amazon Chime](getting-started.md#chime-setup)\. 
+If the endpoint value doesn't appear in the **Email \(endpoints\)** field, make sure that the SNS topic is set up correctly in the Microsoft Teams channel, Slack channel or Amazon Chime webhook\. For more information, see [Setting up AWS Chatbot with Microsoft Teams](teams-setup.md), [Setting up AWS Chatbot with Slack](slack-setup.md), or [Setting up AWS Chatbot with Amazon Chime](chime-setup.md)\. 
 
    1. Choose **Next**\.
 

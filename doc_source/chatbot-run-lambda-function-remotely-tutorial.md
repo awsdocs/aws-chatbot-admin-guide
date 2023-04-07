@@ -186,7 +186,7 @@ There's no limit to the number of workspaces that you can set up for AWS Chatbot
 
 ## Step 5: Invoke a Lambda function from Slack<a name="invoke-lambda-function"></a>
 
-After you configure a chatbot in AWS Chatbot, you can invoke Lambda functions from Slack using AWS CLI syntax\. To interact with AWS Chatbot in Slack, enter **@aws** followed by an AWS CLI command\. For more information, see [Running AWS CLI commands from Slack channels](chatbot-cli-commands.md) in the *AWS Chatbot Administrator Guide\.* 
+After you configure a chatbot in AWS Chatbot, you can invoke Lambda functions from Slack using AWS CLI syntax\. To interact with AWS Chatbot in Slack, enter **@aws** followed by an AWS CLI command\. For more information, see [Running AWS CLI commands from chat channels](chatbot-cli-commands.md) in the *AWS Chatbot Administrator Guide\.* 
 
 **To invoke a Lambda function**
 
@@ -265,7 +265,7 @@ If you don't receive a notification in Slack or an email from CloudWatch, naviga
 
 ## Step 7: Clean up resources<a name="clean-up-resources"></a>
 
-You can remove any resources created for this tutorial that you don't want to keep by navigating to the specific service’s console and deleting the resource\.  Removing unwanted or unused resources is beneficial because it lowers overall costs to you\.
+You can remove any resources created for this tutorial that you don't want to keep by navigating to the specific service’s console and deleting the resource\. Removing unwanted or unused resources is beneficial because it lowers overall costs to you\.
 
 
 

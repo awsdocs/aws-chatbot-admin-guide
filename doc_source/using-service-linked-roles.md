@@ -25,7 +25,7 @@ The AWS Chatbot service\-linked role gives permissions for the following service
 
 These permissions allow AWS Chatbot to perform operations on Amazon SNS topics and CloudWatch Logs\.
 
-IAM administrators can view, but can't edit, the permissions for the AWS Chatbot service\-linked role\.
+Administrators can view, but can't edit, the permissions for the AWS Chatbot service\-linked role\.
 
 The **AWSServiceRoleForAWSChatbot** service\-linked role provides trust permissions to the following service to assume its role:
 + management\.chatbot\.amazonaws\.com

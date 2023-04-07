@@ -1,6 +1,6 @@
 # Logging AWS Chatbot API calls with AWS CloudTrail<a name="logging-using-cloudtrail"></a>
 
-AWS Chatbot integrates several events with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in AWS Chatbot\. CloudTrail captures API calls for AWS Chatbot as events\. The calls captured include calls from the AWS Chatbot console and code calls to the AWS Chatbot API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for AWS Chatbot\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to AWS Chatbot, the IP address from which the request was made, who made the request, when it was made, and additional details\. For more information, see [Viewing Events with CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
+AWS Chatbot integrates events with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in AWS Chatbot\. CloudTrail captures API calls for AWS Chatbot as events\. The calls captured include calls from the AWS Chatbot console and code calls to the AWS Chatbot API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for AWS Chatbot\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to AWS Chatbot, the IP address from which the request was made, who made the request, when it was made, and additional details\. For more information, see [Viewing Events with CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
 To learn more about CloudTrail, including how to configure and enable it, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
@@ -12,14 +12,8 @@ When you create a *trail*, you can enable continuous delivery of AWS Chatbot eve
 
 ## Logging AWS Chatbot API information in CloudTrail<a name="service-name-info-in-cloudtrail"></a>
 
-AWS Chatbot supports logging of the following actions as events in CloudTrail log files:
-+ DescribeSlackWorkspaces
-+ DescribeSlackChannels
-+ RedeemSlackOAuthCode
-+ GetSlackOAuthParameters
-
 Every event log entry contains information about who generated the request\. The identity information helps you determine the following: 
-+ Whether the request was made with root or AWS Identity and Access Management \(IAM\) user credentials\.
++ Whether the request was made with root user or IAM user credentials\.
 + Whether the request was made with temporary security credentials for a role or for a federated user\.
 + Whether the request was made by another AWS service\.
 

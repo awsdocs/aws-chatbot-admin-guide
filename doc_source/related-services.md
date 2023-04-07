@@ -1,6 +1,6 @@
-# Using AWS Chatbot with other AWS services<a name="related-services"></a>
+# Monitoring AWS services using AWS Chatbot<a name="related-services"></a>
 
-AWS Chatbot works with a number of AWS services, including [Amazon CloudWatch](https://console.aws.amazon.com/cloudwatch/), [AWS Security Hub](https://console.aws.amazon.com/securityhub/), and [Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)\. All services that work with AWS Chatbot use [Amazon SNS topics](https://docs.aws.amazon.com/sns/latest/dg/) as targets to send event and alarm notifications\. You may already have established Amazon SNS topics that send notifications to DevOps and development personnel as emails\. Because AWS Chatbot redirects those Amazon SNS topics' notifications to chat rooms, you can map those Amazon SNS topics to a Slack channel or Amazon Chime webhook in the AWS Chatbot console\. 
+You can use AWS Chatbot to monitor and receive notifications about other AWS services\. AWS Chatbot works with a number of AWS services, including [Amazon CloudWatch](https://console.aws.amazon.com/cloudwatch/), [AWS Security Hub](https://console.aws.amazon.com/securityhub/), and [Amazon GuardDuty](https://console.aws.amazon.com/guardduty/)\. All services that work with AWS Chatbot use [Amazon SNS topics](https://docs.aws.amazon.com/sns/latest/dg/) as targets to send event and alarm notifications\. You may already have established Amazon SNS topics that send notifications to DevOps and development personnel as emails\. Because AWS Chatbot redirects those Amazon SNS topics' notifications to chat rooms, you can map those Amazon SNS topics to a Amazon Chime webhook, Microsoft Teams channel, or Slack channel in the AWS Chatbot console\. 
 
 When you create a new Amazon SNS topic, your services will require additional configuration\. 
 
@@ -19,7 +19,7 @@ When you create a new Amazon SNS topic, your services will require additional co
 + [AWS Systems Manager Runbooks](#runbooks)
 + [AWS Systems Manager Incident Manager](#incidentManager)
 
-You can set up the following AWS services to forward notifications to Amazon Chime or Slack chat rooms\.
+You can set up the following AWS services to forward notifications to Amazon Chime, Microsoft Teams, or Slack chat rooms\.
 
 ## AWS Billing and Cost Management<a name="aws-billing"></a>
 
@@ -35,7 +35,7 @@ AWS Chatbot supports AWS CloudFormation notifications through Amazon SNS topics\
 
 ## Notifications for AWS developer tools<a name="codeserviceevents"></a>
 
-AWS provides a suite of cloud\-based developer tools for creating, managing, and working with software development projects\. The AWS development tools suite includes AWS services such as AWS CloudFormation stacks, AWS CodeBuild, AWS CodeCommit, AWS CodeDeploy, AWS CodePipeline, and more\. You can redirect Amazon SNS topic subscriptions for these services to AWS Chatbot\. For example, if you want notifications about events in an AWS CodeCommit repository or in a pipeline in AWS CodePipeline to appear in a Slack channel for your development teams, you can set up notifications for those resources in the Developer Tools console, and then integrate the SNS topic used for those notifications with AWS Chatbot\. For more information, see [Configure Integration Between Notifications and AWS Chatbot](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/notifications-chatbot.html) in the *Developer Tools Console User Guide*\.
+AWS provides a suite of cloud\-based developer tools for creating, managing, and working with software development projects\. The AWS development tools suite includes AWS services such as AWS CloudFormation stacks, AWS CodeBuild, AWS CodeCommit, AWS CodeDeploy, AWS CodePipeline, and more\. You can redirect Amazon SNS topic subscriptions for these services to AWS Chatbot\. For example, if you want notifications about events in an AWS CodeCommit repository or in a pipeline in AWS CodePipeline to appear in a Microsoft Teams or Slack channel for your development teams, you can set up notifications for those resources in the Developer Tools console, and then integrate the SNS topic used for those notifications with AWS Chatbot\. For more information, see [Configure Integration Between Notifications and AWS Chatbot](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/notifications-chatbot.html) in the *Developer Tools Console User Guide*\.
 
 ## Amazon CloudWatch alarms<a name="cloudwatch"></a>
 
@@ -56,17 +56,17 @@ AWS Chatbot also supports several AWS services through CloudWatch Events\. For m
 
 ## Amazon EventBridge<a name="eventbridge"></a>
 
- AWS Chatbot supports multiple AWS services through [Amazon EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-eventbridge-rule.html)\. Amazon EventBridge uses rules to help manage AWS service events and how you respond to them\. You can use these rules to associate an Amazon SNS topic \(or other actions\) with an event type from any AWS service\.
+ AWS Chatbot supports multiple AWS services through [Amazon EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-eventbridge-rule.html)\. EventBridge uses rules to help manage AWS service events and how you respond to them\. You can use these rules to associate an Amazon SNS topic \(or other actions\) with an event type from any AWS service\.
 
-You map the Amazon SNS topic to the Amazon EventBridge rule, and then map it to a Slack channel or Amazon Chime webhook in the AWS Chatbot console\. When a service event matches the rule, the rule's target Amazon SNS topic sends an event to the AWS Chatbot for processing\. The AWS Chatbot then sends a notification to the chat room\. For more information about creating Amazon EventBridge rules for AWS Chatbot see, [Creating an Amazon EventBridge Rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)\.
+You map the Amazon SNS topic to the EventBridge rule, and then map it to a chat channel or Amazon Chime webhook in the AWS Chatbot console\. When a service event matches the rule, the rule's target Amazon SNS topic sends an event to the AWS Chatbot for processing\. The AWS Chatbot then sends a notification to the chat room\. For more information about creating EventBridge rules for AWS Chatbot see, [Creating an EventBridge Rule that sends notifications to AWS Chatbot](create-eventbridge-rule.md)\.
 
 **Note**  
 AWS Chatbot only delivers notifications with their original EventBridge event message content to chat channels\. If this message content is modified \(such as by using EventBridge [InputTransformers](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html)\), AWS Chatbot won't be able to deliver notifications to your chat channels\.
 
-Previously, AWS Chatbot event support only included: AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\. Currently, AWS Chatbot can process most service events handled by Amazon EventBridge\. For an exhaustive list of supported service events, see [EventBridge Event Examples from Supported AWS Services](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html) in the *Amazon EventBridge User Guide*\.
+Previously, AWS Chatbot event support only included: AWS Config, Amazon GuardDuty, AWS Health, AWS Security Hub, and AWS Systems Manager\. Currently, AWS Chatbot can process most service events handled by EventBridge\. For an exhaustive list of supported service events, see [EventBridge Event Examples from Supported AWS Services](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html) in the *EventBridge User Guide*\.
 
 **Note**  
-Event notifications from: CloudWatch Alarms, CodeBuild, CodeCommit, CodeDeploy, and CodePipeline are not currently supported via EventBridge rules\. If you want to receive notifications for one of these services, you can go to its console, and configure Amazon SNS notifications that you can then map to your Slack channel or Amazon Chime webhook configuration in AWS Chatbot\. For more information, see [Amazon CloudWatch alarms ](#cloudwatch)or [Notifications for AWS developer tools](#codeserviceevents)\. 
+Event notifications from: CloudWatch Alarms, CodeBuild, CodeCommit, CodeDeploy, and CodePipeline are not currently supported via EventBridge rules\. If you want to receive notifications for one of these services, you can go to its console, and configure Amazon SNS notifications that you can then map to your chat channel or Amazon Chime webhook configuration in AWS Chatbot\. For more information, see [Amazon CloudWatch alarms ](#cloudwatch)or [Notifications for AWS developer tools](#codeserviceevents)\. 
 
 ## [AWS Config](https://console.aws.amazon.com/config/)<a name="aws-config"></a>
 
@@ -80,7 +80,7 @@ For AWS Config monitoring, [you configure Amazon CloudWatch Events rules](https:
 
 Amazon GuardDuty is a security threat monitoring service that detects and reports on potential security threats in your AWS account\. It uses threat intelligence feeds, such as lists of malicious IPs and domains, and machine learning to identify possible unauthorized and malicious activity in your AWS environment\.
 
-GuardDuty reports its security incidents and threats through *findings*\. Findings appear in the GuardDuty console and automatically appear as CloudWatch Events\. You then [create Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html),  so these events appear as notifications to a selected SNS topic\. You then map that SNS topic to a Slack channel or Amazon Chime webhook in AWS Chatbot\.
+GuardDuty reports its security incidents and threats through *findings*\. Findings appear in the GuardDuty console and automatically appear as CloudWatch Events\. You then [create Amazon CloudWatch Events rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html),  so these events appear as notifications to a selected SNS topic\. You then map that SNS topic to a chat channel or Amazon Chime webhook in AWS Chatbot\.
 
  For more information, see [Monitoring Amazon GuardDuty Findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) in the *Amazon GuardDuty User Guide*\.
 
@@ -131,7 +131,7 @@ For information about monitoring Systems Manager events with CloudWatch, see [Mo
 
 ## AWS Systems Manager Runbooks<a name="runbooks"></a>
 
-SM runbooks define the actions that Systems Manager performs on your managed instances and other AWS resources when an automation runs\. A runbook contains one or more steps that run in sequential order\. The process of running these actions and their steps is called the automation\. AWS Chatbot supports the ability to run SM runbooks directly from Slack using CLI commands\. You can type a command to list your runbooks and choose a runbook to run\. Runbooks can require one or more input parameters before running \(for example, Amazon EC2 instances can require inputs such as instance id\)\. Once the runbook begins, it runs in its entirety\. For an example of running a runbook using a CLI command, see [Run an Automation runbook](common-use-cases.md#run-book)\.
+SM runbooks define the actions that Systems Manager performs on your managed instances and other AWS resources when an automation runs\. A runbook contains one or more steps that run in sequential order\. The process of running these actions and their steps is called the automation\. AWS Chatbot supports the ability to run SM runbooks directly from Microsoft Teams or Slack using CLI commands\. You can type a command to list your runbooks and choose a runbook to run\. Runbooks can require one or more input parameters before running \(for example, Amazon EC2 instances can require inputs such as instance id\)\. Once the runbook begins, it runs in its entirety\. For an example of running a runbook using a CLI command, see [Run an Automation runbook](common-use-cases.md#run-book)\.
 
 For more information about SM runbooks, see[ Working with runbooks](https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-documents.html) in the *AWS Systems Manager User Guide*\.
 

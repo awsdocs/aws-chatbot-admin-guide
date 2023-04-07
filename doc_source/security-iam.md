@@ -8,7 +8,7 @@ How you use AWS Identity and Access Management \(IAM\) differs, depending on the
 
 **Service user** – If you use the AWS Chatbot service to do your job, then your administrator provides you with the credentials and permissions that you need\. As you use more AWS Chatbot features to do your work, you might need additional permissions\. Understanding how access is managed can help you request the right permissions from your administrator\. If you cannot access a feature in AWS Chatbot, see [Troubleshooting AWS Chatbot identity and access](security_iam_troubleshoot.md)\.
 
-**Service administrator** – If you're in charge of AWS Chatbot resources at your company, you probably have full access to AWS Chatbot\. It's your job to determine which AWS Chatbot features and resources your employees should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with AWS Chatbot, see [How AWS Chatbot works with IAM](#security_iam_service-with-iam)\.
+**Service administrator** – If you're in charge of AWS Chatbot resources at your company, you probably have full access to AWS Chatbot\. It's your job to determine which AWS Chatbot features and resources your service users should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with AWS Chatbot, see [How AWS Chatbot works with IAM](#security_iam_service-with-iam)\.
 
 **IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to AWS Chatbot\. To view example AWS Chatbot identity\-based policies that you can use in IAM, see [Identity\-based policies for AWS Chatbot](security_iam_service-with-iam-id-based-policies.md#security_iam_id-based-policy-examples)\.
 
@@ -21,11 +21,6 @@ For an overview of IAM and its features, see [Understanding How IAM Works](https
 **Topics**
 + [Identity\-based policies and AWS Chatbot](#identity-based-policies-use-in-chatbot)
 + [Resource\-level permissions and AWS Chatbot](#resource-based-policies-use-in-chatbot)
-+ [Role Setting](#role-setting)
-+ [User role requirement](#role-req)
-+ [Channel guardrails](#channel-guardrails)
-+ [Mapped roles](#mapped-roles)
-+ [Protection policy](#cbt-protection-policy)
 + [Condition keys and AWS Chatbot](#security_iam_service-with-iam-id-based-policies-conditionkeys)
 + [Authorization based on AWS Chatbot tags](#security_iam_service-with-iam-tags)
 + [Using temporary credentials with AWS Chatbot](#security_iam_service-with-iam-roles-tempcreds)
@@ -55,40 +50,6 @@ When you customize IAM policies for users to work with the AWS Chatbot service, 
 AWS Chatbot supports resource\-level permissions, but not resource\-based policies\. 
 
 For more information about how IAM resource\-level permissions work with AWS Chatbot, see [IAM Resource\-Level Permissions for AWS Chatbot](security_iam_service-with-iam-resource-based-policies.md)\.
-
-### Role Setting<a name="role-setting"></a>
-
-Your role setting determines what permissions your channel members have within the Chatbot\. There are two permissions schemes you can choose from for your role setting:
-+ **Channel IAM role**
-  + A channel IAM role gives all of your channel members the same permissions\. This is useful if your channel members are similar users or they typically perform the same actions in Slack\. If you use a channel IAM role, your channel members can still choose their own user roles\. Your channel members actions are limited by your channel guardrails, despite what user roles they may have applied\. You can set your channel IAM role in channel configurations from the AWS Chatbot console\.
-+ **User roles**
-  + User roles require channel members to choose their own roles\. Subsequently, different users in your channel can have different permissions\. If you have a diverse set of channel members or you don't want new channel members to perform actions as soon as they join your channel, user roles are appropriate\. To perform actions, your channel members must have a user role applied\. This is done from Slack\. When channel members, apply a user role, it is mapped to their Slack ID\. Administrators have the ability to unmap user roles from Slack IDs in the Chatbot console\. Your channel member's actions are limited by your channel guardrails, despite what user roles they may have applied\. For more information on managing user roles, see [Managing user roles](manage-user-roles.md)\.
-
-### User role requirement<a name="role-req"></a>
-
-Administrators can require user roles for all channel members by enabling a user role requirement in the Chatbot console\. This can be done at the account level in **User permissions**, if you want to require every workspace and channel to use user roles\. It can also be done at the channel configuration level wherein a channel level administrator can enable the user role requirement\.
-
-### Channel guardrails<a name="channel-guardrails"></a>
-
-Channel guardrails provide detailed control over what actions are available to your channel members\. They constrain and take precedence over both user roles and channel IAM roles\. If you had an existing Chatbot configuration with applied policies, those policies are automatically applied to your channel guardrails\. You can set, view, and edit your guardrail policies in the AWS Chatbot console\.
-
-**Note**  
-AWS Service Roles IAM policies can't be used as guardrail policies\.
-
-### Mapped roles<a name="mapped-roles"></a>
-
-When channel members choose user roles, they are mapped to their Slack IDs\. Channel members’ user roles are visible to administrators from the **Mapped roles** table in the AWS Chatbot console\. Administrators have the ability to unmap user roles from Slack IDs\. For more information on managing user roles, see [Managing User Roles](manage-user-roles.md)\.
-
-**Note**  
-Channel members can still apply user roles after they are unmapped\.
-
-### Protection policy<a name="cbt-protection-policy"></a>
-
-The expansion of usable CLI commands can allow channel members to create, read, update, and delete your AWS resources\. To prevent this, a protection policy is applied to existing AWS Chatbot configurations by default to prevent unexpected changes\. Specifically, it restricts permissions and actions to what was available before all CLI commands were usable\. This policy is detachable, but we strongly recommend it stay in place until you’ve verified that all your guardrails, channel IAM roles, and user\-level roles align with your governance policy or channel requirements\. You can detach this policy from:
-+ Individual workspaces\.
-+ Individual channels in the channel configurations page\.
-+ A selection of channels using the **Set guardrails** button\.
-+ All channel configurations in the **User permissions** page of the AWS Chatbot console\.
 
 ### Condition keys and AWS Chatbot<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 

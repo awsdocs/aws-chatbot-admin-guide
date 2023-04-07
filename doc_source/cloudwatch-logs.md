@@ -13,7 +13,7 @@ There is an additional charge for using CloudWatch Logs\. For more details, see 
 
 ## Enabling CloudWatch Logs<a name="enabling-cloudwatch-logs"></a>
 
-You can enable CloudWatch Logs during the setup flow of your Amazon Chime or Slack channel configuration\. For existing channels, you can edit the configuration to enable logging\.
+You can enable CloudWatch Logs during the setup flow of your Amazon Chime, Microsoft Teams, or Slack channel configuration\. For existing channels, you can edit the configuration to enable logging\.
 
 **To enable CloudWatch Logs for a new configuration**
 

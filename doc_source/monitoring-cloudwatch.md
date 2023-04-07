@@ -20,7 +20,7 @@ To get AWS Chatbot metrics, you must specify **US East \(N\. Virginia\)** for th
 | --- | --- | 
 |  `EventsThrottled`  |  The number of throttled notifications\. Events may be throttled if the number of events received exceeds 10 per second\. Units: Count  | 
 |  `EventsProcessed`  |  The number of event notifications received by AWS Chatbot\. Units: Count  | 
-|  `UnsupportedEvents`  |  The number of unsupported events or messages attempted\. For a full list of AWS services supported by AWS Chatbot, see [Using AWS Chatbot with other AWS services](related-services.md)\. Units: Count  | 
+|  `UnsupportedEvents`  |  The number of unsupported events or messages attempted\. For a full list of AWS services supported by AWS Chatbot, see [Monitoring AWS services using AWS Chatbot](related-services.md)\. Units: Count  | 
 |  `MessageDeliverySuccess`  |  The number of messages successfully delivered to the chat client\. Units: Count  | 
 |  `MessageDeliveryFailure`  |  The number of messages that failed to deliver to the chat client\. Units: Count  | 
 

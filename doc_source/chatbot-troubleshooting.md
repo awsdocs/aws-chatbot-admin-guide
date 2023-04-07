@@ -9,10 +9,10 @@ If you configured your AWS service to send notifications to the Amazon Simple No
 **Possible causes** 
 + **There is no connectivity\.**
 
-  Test your connectivity and your AWS Chatbot configuration by using the **Send test message button** in the [AWS Chatbot console](https://console.aws.amazon.com/chatbot/)\. For more information, see [Test notifications from AWS services to Amazon Chime or Slack](getting-started.md#test-notifications)\. 
+  Test your connectivity and your AWS Chatbot configuration by using the **Send test message button** in the [AWS Chatbot console](https://console.aws.amazon.com/chatbot/)\. For more information, see [Test notifications from AWS services to Amazon Chime](chime-setup.md#test-notifications), [Test notifications from AWS services to Microsoft Teams](teams-setup.md#test-notifications-teams), or [Test notifications from AWS services to Slack](slack-setup.md#test-notifications-slack)\.
 + **The bot is not invited to the channel\.**
 
-  Ensure that the AWS Chatbot app \("@aws"\) is added to the Slack channel\. If it hasn't, in Slack, add the AWS Chatbot app by choosing **Add apps** from the channel's **Details** screen\.
+  Ensure that the AWS Chatbot app \("@aws"\) is added to the chat channel\. If it hasn't, in Microsoft Teams or Slack, add the AWS Chatbot app by choosing **Add apps** from the channel's **Details** screen\.
 + **The notification's originating service is not supported by AWS Chatbot\.**
 
   For a list of supported services, see [Using AWS Chatbot with Other AWS Services](related-services.md)\.
@@ -21,7 +21,7 @@ If you configured your AWS service to send notifications to the Amazon Simple No
   In the Amazon SNS console, go to the **Topics** page, choose the **Subscriptions** tab, and then verify that the topic has a subscription\. If the topic doesn't, open the AWS Chatbot console, open your authorized client, and then look at the **Configured channels** or **Configured webhooks** list\. Add a new channel or webhook configuration, and then add the SNS topic\. Without this configuration, event notifications can't reach the chat rooms\. 
 + **The Amazon SNS topic has server\-side encryption turned on\.**
 
-  If you have server\-side encryption enabled for your Amazon SNS topics, you must include the following section in your AWS KMS key policy\. This gives sending services such as Amazon EventBridge permissions to post events to the encrypted Amazon SNS topics\.
+  If you have server\-side encryption enabled for your Amazon SNS topics, you must give permissions to the sending services in your AWS KMS key policy to post events to the encrypted SNS topics\. The following policy is an example for EventBridge\.
 
   ```
   {
@@ -39,6 +39,8 @@ If you configured your AWS service to send notifications to the Amazon Simple No
   ```
 
   In order to successfully test the configuration from the console, your role must also have permission to use the AWS KMS key\.
+
+  AWS managed service keys don’t allow you to modify access policies, so you will need AWS KMS/CMK for encrypted SNS topics\. You can then update the access permissions in the AWS KMS key policy to allow the service that sends messages to publish to your encrypted SNS topics \(for example, EventBridge\)\.
 + **Your SNS topic subscription to the AWS Chatbot has the Enable raw message delivery setting enabled\.**
 
   Don't enable the **Enable raw message delivery** feature for any SNS topic subscriptions to AWS Chatbot\.
@@ -62,7 +64,7 @@ If you want to unsubscribe only some notifications from the channel or chatroom,
 **Possible causes**
 + **The IAM role doesn’t have CloudWatchRead permissions\. **
 
-  In the AWS Chatbot console, create a new role\. This role requires the Notifications permissions policy from the AWS Chatbot console when you configure a new webhook or Slack channel\. You can also edit your IAM role to [add the CloudWatchRead permissions](getting-started.md#editing-iam-roles-for-chatbot) for AWS Chatbot\.
+  In the AWS Chatbot console, create a new role\. This role requires the Notifications permissions policy from the AWS Chatbot console when you configure a new webhook or Slack channel\. You can also edit your IAM role to [add the CloudWatchRead permissions](understanding-permissions.md#editing-iam-roles-for-chatbot) for AWS Chatbot\.
 + **AWS Chatbot doesn't have access to all AWS Regions\.**
 
   AWS Chatbot may execute API calls from any nearby AWS Region\. If any Region is disabled, you may experience problems with CloudWatch metrics graphs, among other issues\. For more information, see [I get AccessDenied or permissions errors\.](#chatbot-troubleshooting-regions)
@@ -71,7 +73,7 @@ If you want to unsubscribe only some notifications from the channel or chatroom,
 
 If the AWS Billing and Cost Management console displays an error message for the SNS topic you want to use for notifications, [you can edit the SNS topic's permissions policy so it can forward Budget notifications\.](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-sns-policy.html) 
 
-Do this if you have already configured an SNS topic that has a subscription to AWS Chatbot or you've configured a new SNS topic\. It is not needed if you want to use an Amazon SNS topic that is already configured and working with AWS Billing and Cost Management\. [You can then set up that topic with a subscription to AWS Chatbot](getting-started.md#subscribe-sns-topic)\.
+Do this if you have already configured an SNS topic that has a subscription to AWS Chatbot or you've configured a new SNS topic\. It is not needed if you want to use an Amazon SNS topic that is already configured and working with AWS Billing and Cost Management\. [You can then set up that topic with a subscription to AWS Chatbot](subscribe-sns-topic.md)\.
 
 ## How do I edit my configuration name?<a name="chatbot-notification-troubleshooting-edit-config-name"></a>
 
@@ -82,7 +84,7 @@ Configuration names can't be edited\. Names must be unique across your account\.
 **Possible causes**
 + **You are missing some IAM permissions or trust relationships\.**
 
-  Make sure you have the correct policies set up by following the instructions found in [Setting up AWS Chatbot](setting-up.md) and [Identity and Access Management for AWS Chatbot](security-iam.md)\.
+  Make sure you have the correct policies set up by following the instructions found in [Setting up AWS Chatbot](getting-started.md#setting-up) and [Identity and Access Management for AWS Chatbot](security-iam.md)\.
 + **AWS Chatbot doesn't have access to all AWS Regions\.**
 
   AWS Chatbot is a global service and may execute API calls from any nearby AWS Region\. If any Region is disabled, you may experience errors\. Make sure the IAM role you set up for AWS Chatbot to assume has access to all Regions\. 
@@ -149,7 +151,7 @@ For example, the policy below allows AWS Chatbot in **us\-east\-2** but denies o
 
 ## Provide feedback<a name="feedback"></a>
 
-You can provide feedback about AWS Chatbot directly from your Amazon Chime chat room, Slack channel, or from the AWS Chatbot console\. To leave feedback from your Amazon Chime chat room or Slack channel, type the following command and replace *comments* with your own information\.
+You can provide feedback about AWS Chatbot directly from your Amazon Chime chat room, chat channels, or from the AWS Chatbot console\. To leave feedback from your Amazon Chime chat room or chat channel, type the following command and replace *comments* with your own information\.
 
 ```
 @aws feedback comments

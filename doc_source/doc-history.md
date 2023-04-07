@@ -4,6 +4,9 @@ The following table describes important changes to the *AWS Chatbot Admin Guide*
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Natural language and AWS Resource Explorer support added](#doc-history) | New page added to explain the addition of natural language support and Resource Explorer\. | March 30, 2023 | 
+| [Microsoft Teams support added](#doc-history) | Microsoft Teams added as a supported chat client\. | March 16, 2023 | 
+| [Command alias support added](#doc-history) | Content updates to reflect addition of command aliases\. | November 22, 2022 | 
 | [Additional CLI command support added](#doc-history) | Content updates to reflect expansion of available CLI commands\. | November 29, 2021 | 
 | [AWS Chatbot EventBridge release](#doc-history) | Content updates to reflect addition of Amazon EventBridge\. | April 23, 2021 | 
 | [AWS Chatbot general availability release](#doc-history) | Content updates to reflect improvements made to AWS Chatbot during the preview period\. | April 22, 2020 | 
